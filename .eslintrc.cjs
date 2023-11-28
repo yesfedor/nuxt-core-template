@@ -66,10 +66,7 @@ module.exports = {
     'vue/no-multiple-template-root': 'warn',
 
     // Others
-    'filename-rules/match': [2, {
-      '.js': 'PascalCase',
-      '.ts': 'PascalCase',
-    }],
+    'filename-rules/match': 'off',
     'no-relative-path/no-relative-path': 2,
   },
 }

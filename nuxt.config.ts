@@ -34,7 +34,9 @@ export default defineNuxtConfig({
     port: 3210,
   },
   pwa: {},
-  pinia: {},
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
   app: {
     head: headConfig,
   },
