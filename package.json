@@ -1,5 +1,11 @@
 {
   "name": "nuxt-core-template",
+  "author": {
+    "email": "yesfedor.go@gmail.com",
+    "name": "Garanin Fedor",
+    "url": "https://yesfedor.com"
+  },
+  "version": "0.95.0",
   "private": true,
   "type": "module",
   "scripts": {

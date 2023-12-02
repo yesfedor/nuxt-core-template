@@ -1,75 +1,49 @@
-# Nuxt 3 Minimal Starter
+# Nuxt Core Template
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project is a template, for quickly getting started on your new project.
+When creating the template, many requests from businesses were taken into account, and the convenience of development.
 
-## Setup
+---
+### About
 
-Make sure to install the dependencies:
+Thus, the following plugins are now configured and supported:
+1. DotEnv files in [./enviroments]() folder supported stage with balanced setting: local, dev, stage, prod
+0. Typescript 5 + Vue 3 + Nuxt 3
+0. Eslint, Stylelint (without lint-staged)
+0. SCSS
+0. Consola - To wrap the logs
+0. Mitt - Global emitter
+0. Vueuse - for support function
+0. Lodash-es - for data manipulation
+0. Validate with yup - data validation and scheme organizer
+0. and more Vue / Nuxt modules - Vue Router, Pinia, I18n, etc..
 
-```bash
-# npm
-npm install
+---
 
-# pnpm
-pnpm install
+### Installation
 
-# yarn
-yarn install
-
-# bun
-bun install
+```shell
+nvm install && nvm use
+npm i && cp ./enviroments/local.env .env
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+### Dev Mode
 
-```bash
-# npm
+```shell
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+---
 
-Build the application for production:
+### Build and start server
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```shell
+npm run build && node .output/server/index.mjs 
 ```
+### SSG mode and start server
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```shell
+nuxi generate && npx serve .output/public
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
