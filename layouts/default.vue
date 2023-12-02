@@ -1,6 +1,7 @@
 <template>
   <div>
     <slot />
+    <AppGlobalScope />
   </div>
 </template>
 
