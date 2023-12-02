@@ -1,6 +1,6 @@
 import viteConfig from './configs/vite.config'
 import headConfig from './configs/head.config'
-import i18nConfig from './configs/i18n.config'
+import experimentalConfig from './configs/experimental.config'
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     // https://nuxt.com/modules/pinia
     '@pinia/nuxt',
     // https://nuxt.com/modules/vite-pwa-nuxt
+    // https://vite-pwa-org.netlify.app/frameworks/nuxt.html#vitepwamanifest-nuxtpwamanifest-in-app-vue
     '@vite-pwa/nuxt',
     // https://nuxt.com/modules/vee-validate
     '@vee-validate/nuxt',
@@ -40,19 +41,40 @@ export default defineNuxtConfig({
       },
     },
   },
+  experimental: experimentalConfig,
   devtools: {
-    enabled: true,
+    enabled: false,
   },
   devServer: {
     host: '0.0.0.0',
     port: 3210,
   },
-  pwa: {},
+  pwa: {
+    strategies: 'generateSW',
+  },
   pinia: {
     storesDirs: ['./stores/**'],
   },
   i18n: {
     vueI18n: './configs/i18n.config.ts',
+    strategy: 'prefix_except_default',
+    lazy: true,
+    langDir: 'locales',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    locales: [
+      {
+        code: 'en',
+        file: 'en.ts',
+      },
+    ],
+    experimental: {
+      jsTsFormatResource: true,
+    },
   },
   app: {
     head: headConfig,

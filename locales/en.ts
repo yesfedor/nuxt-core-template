@@ -1,3 +1,5 @@
-export default {
-  welcome: 'Hello, Nuxt 3!',
-}
+export default defineI18nLocale(() => {
+  return {
+    welcome: 'Hello, Nuxt 3!',
+  }
+})

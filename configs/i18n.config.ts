@@ -1,9 +1,5 @@
-import en from '~/locales/en'
+import { defineI18nConfig } from '#i18n'
 
-export default {
-  legacy: false,
-  locale: 'en',
-  messages: {
-    en,
-  },
-}
+export default defineI18nConfig(() => {
+  return {}
+})

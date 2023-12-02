@@ -2,6 +2,9 @@ import eslintPlugin from 'vite-plugin-eslint'
 import type { NuxtOptions } from '@nuxt/schema'
 
 export default {
+  build: {
+    assetsDir: 'static/'
+  },
   css: {
     preprocessorOptions: {
       scss: {
