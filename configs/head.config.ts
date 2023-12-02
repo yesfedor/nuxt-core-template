@@ -15,3 +15,4 @@ export default {
   'script': [],
   'noscript': [],
 } as NuxtOptions['app']['head']
+

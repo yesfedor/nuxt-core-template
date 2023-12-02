@@ -1,5 +1,6 @@
 import viteConfig from './configs/vite.config'
 import headConfig from './configs/head.config'
+import i18nConfig from './configs/i18n.config'
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -17,7 +18,20 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     // https://nuxt.com/modules/vee-validate
     '@vee-validate/nuxt',
+    // https://nuxt.com/modules/icons
+    'nuxt-icons',
+    // https://v8.i18n.nuxtjs.org/options/vue-i18n
+    '@nuxtjs/i18n',
   ],
+  components: {
+    dirs: [
+      {
+        prefix: 'App',
+        path: '~/components',
+        pathPrefix: true,
+      },
+    ],
+  },
   postcss: {
     plugins: {
       cssnano: { preset: 'default' },
@@ -36,6 +50,9 @@ export default defineNuxtConfig({
   pwa: {},
   pinia: {
     storesDirs: ['./stores/**'],
+  },
+  i18n: {
+    vueI18n: './configs/i18n.config.ts',
   },
   app: {
     head: headConfig,

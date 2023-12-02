@@ -52,18 +52,33 @@ module.exports = {
 
     // Vue / Nuxt
     'vue/no-v-html': 'warn',
-    'vue/multi-word-component-names': ['error', {
-      ignores: ['error', 'default', 'minimal', 'index', 'main', 'slug', 'id', 'app'],
-    }],
+    'vue/multi-word-component-names': 'off',
     'vue/attribute-hyphenation': 'warn',
     'vue/attributes-order': 'warn',
-    'vue/max-attributes-per-line': 'warn',
+    'vue/singleline-html-element-content-newline': ['error', {
+      'ignoreWhenNoAttributes': true,
+      'ignoreWhenEmpty': true,
+      'ignores': ['pre', 'textarea'],
+    }],
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': {
+        'max': 3,
+      },
+      'multiline': {
+        'max': 1,
+      },
+    }],
     'vue/order-in-components': 'warn',
     'vue/prop-name-casing': 'warn',
     'vue/no-dupe-keys': ['error', {
       groups: [],
     }],
     'vue/no-multiple-template-root': 'warn',
+    'vue/html-closing-bracket-spacing': ['warn', {
+      'startTag': 'never',
+      'endTag': 'never',
+      'selfClosingTag': 'always',
+    }],
 
     // Others
     'filename-rules/match': 'off',

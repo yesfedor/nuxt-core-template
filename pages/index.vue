@@ -1,6 +1,9 @@
 <template>
   <div class="app-page-home">
-    Hello, Nuxt 3!
+    <h1 class="app-page-home__title">
+      {{ $t('welcome') }}
+    </h1>
+    <nuxt-icon name="reorder" filled />
   </div>
 </template>
 
@@ -12,6 +15,8 @@ definePageMeta({
 
 <style lang="scss">
 .app-page-home {
-  color: dodgerblue;
+  &__title {
+    color: dodgerblue;
+  }
 }
 </style>
