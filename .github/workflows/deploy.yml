@@ -29,8 +29,8 @@ jobs:
 
           # Подставляем значения переменных окружения
           script: |
-            docker exec -it <container_name>${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ matrix.port }})'
-            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
-            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
-            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
-            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ matrix.port }} node .output/server/index.mjs'
+            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ matrix.port }})'
+            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
+            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
+            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
+            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ matrix.port }} node .output/server/index.mjs'

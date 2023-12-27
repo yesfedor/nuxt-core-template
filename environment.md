@@ -12,7 +12,7 @@ You will also need the following repository settings to use the secrets:
 `SERVER_HOST`: The address of the server where Docker is installed.
 `SERVER_USERNAME`: The username for the SSH connection.
 `SSH_PRIVATE_KEY`: The SSH private key to connect to the server.
-Replace `<container_name>` with the actual name of the container in the appropriate lines.
+Replace `<nuxt-core-template_>` with the actual name of the container in the appropriate lines.
 
 When a pull request is created to one of the specified branches (`dev`, `stage`, or `main`), Workflow will be started with the set value of the `stage` environment variable corresponding to the current branch. It will also use the appropriate port depending on the mode.
 
