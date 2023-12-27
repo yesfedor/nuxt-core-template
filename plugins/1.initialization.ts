@@ -1,35 +1,28 @@
 import { defineNuxtPlugin } from '#app'
 import { useGlobalStore } from '~/stores'
+import { useServerOnlyAsync } from '~/composables/useServerOnly'
+import { useClientOnlyAsync } from '~/composables/useClientOnly'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   // deps
   const globalStore = useGlobalStore()
 
-  function initializationGlobal() {
+  async function initializationGlobal() {
     globalStore.initializationGlobal()
   }
 
-  function initializationServerOnly() {
+  async function initializationServerOnly() {
     globalStore.initializationServerOnly()
   }
 
-  function initializationClientOnly() {
+  async function initializationClientOnly() {
     globalStore.initializationClientOnly()
   }
 
-  function initializationFinish() {
-    globalStore.initializationFinish()
-    return {}
-  }
-
   // app:global
-  initializationGlobal()
+  await initializationGlobal()
   // app:server
-  useServerOnly(initializationServerOnly)
+  await useServerOnlyAsync(initializationServerOnly)
   // app:client
-  useClientOnly(initializationClientOnly)
-
-  return {
-    provide: initializationFinish(),
-  }
+  await useClientOnlyAsync(initializationClientOnly)
 })

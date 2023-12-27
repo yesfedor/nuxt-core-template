@@ -14,7 +14,7 @@ export type ApplicationEvents = {
 export default defineNuxtPlugin(({ $config }) => {
   const emitter = mitt<ApplicationEvents>()
 
-  if ($config.public.APP_DEBUG) {
+  if (!$config.public.APP_IS_PROD && $config.public.APP_DEBUG) {
     emitter.on('*', (type, e: unknown) => {
       if (e) {
         consola.info(`[$bus]: ${type}`, e)

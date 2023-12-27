@@ -10,6 +10,18 @@ export default {
     {
       charset: 'utf-8',
     },
+    {
+      name: 'description',
+      content: String(process.env.NUXT_PUBLIC_APP_DESCRIPTION),
+    },
+    {
+      name: 'author',
+      content: String(process.env.NUXT_PUBLIC_APP_AUTHOR),
+    },
+    {
+      name: 'theme-color',
+      content: String(process.env.NUXT_PUBLIC_APP_THEME_COLOR),
+    }
   ],
   link: [],
   style: [],

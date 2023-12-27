@@ -19,9 +19,5 @@ export const useGlobalStore = defineStore('globalStore', {
       // get user data & check auth & validate tokens
       consola.info('[globalStore]: client init')
     },
-    initializationFinish() {
-      // run seo plugin and postprocessing
-      consola.info('[globalStore]: init finished')
-    },
   },
 })

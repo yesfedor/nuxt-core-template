@@ -73,7 +73,7 @@ module.exports = {
     'vue/no-dupe-keys': ['error', {
       groups: [],
     }],
-    'vue/no-multiple-template-root': 'warn',
+    'vue/no-multiple-template-root': 'off',
     'vue/html-closing-bracket-spacing': ['warn', {
       'startTag': 'never',
       'endTag': 'never',

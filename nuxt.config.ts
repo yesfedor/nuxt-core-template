@@ -6,7 +6,10 @@ export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
   runtimeConfig: {
     public: {
-      BASE_URL: String(process.env.BASE_URL)
+      BASE_URL: String(process.env.BASE_URL),
+      APP_DEBUG: Boolean(process.env.APP_DEBUG),
+      APP_IS_PROD: Boolean(process.env.APP_IS_PROD),
+      DEBUG: Boolean(process.env.DEBUG),
     },
   },
   css: ['~/assets/stylesheets/main.scss'],
@@ -74,9 +77,6 @@ export default defineNuxtConfig({
         file: 'en.ts',
       },
     ],
-    experimental: {
-      jsTsFormatResource: true,
-    },
   },
   app: {
     head: headConfig,
