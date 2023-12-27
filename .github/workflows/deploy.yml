@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         stage: [dev, stage, production]
-        port: [3100, 3101, 3102]  # Настройте порты для каждого режима, если требуется
+        # port: [3100, 3101, 3102]  # Настройте порты для каждого режима, если требуется
 
     steps:
       - name: Checkout code
@@ -29,8 +29,16 @@ jobs:
 
           # Подставляем значения переменных окружения
           script: |
-            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ matrix.port }})'
-            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
-            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
-            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
-            docker exec -it nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ matrix.port }} node .output/server/index.mjs'
+            if [[ ${{ matrix.stage }} == "dev" ]]; then
+              port=3100
+            elif [[ ${{ matrix.stage }} == "stage" ]]; then
+              port=3101
+            elif [[ ${{ matrix.stage }} == "production" ]]; then
+              port=3102
+            fi
+
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ port }})'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ port }} node .output/server/index.mjs'
