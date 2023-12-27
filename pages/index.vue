@@ -4,7 +4,7 @@
       {{ $t('welcome') }}
     </h1>
     <nuxt-icon name="reorder" filled />
-    <p>This will be merged into the master. Attempt: 4</p>
+    <p>This will be merged into the master. Attempt: 5</p>
   </div>
 </template>
 
