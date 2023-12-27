@@ -1,0 +1,36 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - stage
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        stage: [dev, stage, production]
+        port: [3000, 3000, 3000]  # Настройте порты для каждого режима, если требуется
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH into server and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          # Подставляем значения переменных окружения
+          script: |
+            docker exec -it <container_name>${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ matrix.port }})'
+            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
+            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
+            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
+            docker exec -it <container_name>${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ matrix.port }} node .output/server/index.mjs'
