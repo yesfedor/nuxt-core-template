@@ -8,15 +8,15 @@ When creating the template, many requests from businesses were taken into accoun
 
 Thus, the following plugins are now configured and supported:
 1. DotEnv files in [./enviroments]() folder supported stage with balanced setting: local, dev, stage, prod
-0. Typescript 5 + Vue 3 + Nuxt 3
-0. Eslint, Stylelint (without lint-staged)
-0. SCSS
-0. Consola - To wrap the logs
-0. Mitt - Global emitter
-0. Vueuse - for support function
-0. Lodash-es - for data manipulation
-0. Validate with yup - data validation and scheme organizer
-0. and more Vue / Nuxt modules - Vue Router, Pinia, I18n, etc..
+2. Typescript 5 + Vue 3 + Nuxt 3
+3. Eslint, Stylelint (without lint-staged)
+4. SCSS
+5. Consola - To wrap the logs
+6. Mitt - Global emitter
+7. Vueuse - for support function
+8. Lodash-es - for data manipulation
+9. VeeValidate with yup - data validation and scheme organizer
+10. and more Vue / Nuxt modules - Vue Router, Pinia, I18n, etc..
 
 ---
 

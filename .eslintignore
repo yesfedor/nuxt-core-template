@@ -1,0 +1,14 @@
+# Nuxt dev/build outputs
+.output
+.nuxt
+.nitro
+dist
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+node_modules
+**/*.d.ts
+.eslintrc.cjs

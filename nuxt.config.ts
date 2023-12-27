@@ -5,10 +5,12 @@ import experimentalConfig from './configs/experimental.config'
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
   runtimeConfig: {
-    public: {},
+    public: {
+      BASE_URL: String(process.env.BASE_URL)
+    },
   },
   css: ['~/assets/stylesheets/main.scss'],
-  ssr: true,
+  ssr: Boolean(process.env.NUXT_SSR),
   modules: [
     // https://github.com/nuxt-modules/stylelint
     '@nuxtjs/stylelint-module',
@@ -43,11 +45,11 @@ export default defineNuxtConfig({
   },
   experimental: experimentalConfig,
   devtools: {
-    enabled: false,
+    enabled: Boolean(process.env.APP_DEVTOOLS),
   },
   devServer: {
-    host: '0.0.0.0',
-    port: 3210,
+    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
+    port: Number(process.env.NITRO_DEV_PORT) || 3000,
   },
   pwa: {
     strategies: 'generateSW',
