@@ -37,8 +37,8 @@ jobs:
               port=3102
             fi
 
-            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${{ port }})'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${port})'
             docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
             docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
             docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
-            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${{ port }} node .output/server/index.mjs'
+            docker exec -it -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${port} node .output/server/index.mjs'
