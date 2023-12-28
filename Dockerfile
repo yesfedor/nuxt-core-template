@@ -27,4 +27,6 @@ RUN ls -la /home/project/.output/server/
 
 RUN ls -la .output/server/
 
+EXPOSE 3000
+
 CMD ["node", ".output/server/index.mjs"]
