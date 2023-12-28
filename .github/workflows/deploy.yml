@@ -33,18 +33,22 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
             echo "::set-output name=PORT::3100"
             echo "::set-output name=ENVIRONMENT_NAME::dev"
+            echo "::set-output name=BRANCH_NAME::dev"
           elif [ "${{ github.ref }}" == "refs/heads/stage" ]; then
             echo "::set-output name=PORT::3101"
             echo "::set-output name=ENVIRONMENT_NAME::stage"
+          echo "::set-output name=BRANCH_NAME::stage"
           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "::set-output name=PORT::3102"
             echo "::set-output name=ENVIRONMENT_NAME::production"
+            echo "::set-output name=BRANCH_NAME::main"
           fi
 
       - name: Deploy to server
         run: |
           scp -r ./* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
-          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "export PORT=${{ steps.set-env.outputs.PORT }} ENVIRONMENT_NAME=${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && cd /home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && docker-compose down && docker-compose up -d --build"
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "export BRANCH_NAME=${{ steps.set-env.outputs.BRANCH_NAME }} PORT=${{ steps.set-env.outputs.PORT }} ENVIRONMENT_NAME=${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && cd /home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && docker-compose down && docker-compose up -d --build"
         env:
           PORT: ${{ steps.set-env.outputs.PORT }}
           ENVIRONMENT_NAME: ${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
+          BRANCH_NAME: ${{ steps.set-env.outputs.BRANCH_NAME }}

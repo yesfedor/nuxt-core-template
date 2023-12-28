@@ -7,6 +7,7 @@ services:
       context: .
       args:
         - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
+        - BRANCH_NAME=${BRANCH_NAME}
       dockerfile: Dockerfile
     ports:
       - "${PORT}:3000"
