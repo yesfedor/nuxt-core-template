@@ -3,7 +3,6 @@
 **/.venv
 **/.classpath
 **/.dockerignore
-**/.env
 **/.gitignore
 **/.project
 **/.settings
@@ -25,12 +24,10 @@
 **/docker-compose*
 **/compose*
 **/Dockerfile*
-**/node_modules
 **/npm-debug.log
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-**/bitbucket-pipelines.yml
 **/Thumbs.db
 .github/
 docs/
@@ -43,4 +40,3 @@ vendor/
 .env.local
 .env.local.php
 LICENSE
-README.md

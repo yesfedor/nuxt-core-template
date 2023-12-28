@@ -29,4 +29,4 @@ RUN npm run build
 
 RUN ls -la /home/project/
 
-CMD ["node", "/home/project/.output/server/index.mjs"]
+CMD ["node", ".output/server/index.mjs"]
