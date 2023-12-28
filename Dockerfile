@@ -2,8 +2,6 @@ FROM node:18.16.1
 
 ARG ENVIRONMENT_NAME
 
-RUN apk update && apk upgrade
-
 RUN apk add git
 
 WORKDIR /home/project
