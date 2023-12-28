@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:latest AS prepare-stage
 
 ARG ENVIRONMENT_NAME
 ARG BRANCH_NAME
@@ -15,6 +15,10 @@ RUN git checkout
 RUN git pull
 
 FROM node:18.16.1
+
+COPY --from=prepare-stage /home/project /home/project
+
+WORKDIR /home/project
 
 COPY ./environments/${ENVIRONMENT_NAME}.env .env
 
