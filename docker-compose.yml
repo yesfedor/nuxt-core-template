@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: nuxt-core-template-${ENVIRONMENT_NAME}
+    build:
+      context: .
+      args:
+        - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:3000"
+    environment:
+      - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
+    volumes:
+      - .:/home/project

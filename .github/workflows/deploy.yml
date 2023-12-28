@@ -7,81 +7,44 @@ on:
       - stage
       - main
 
+env:
+  DOCKER_COMPOSE_VERSION: 1.29.2
+
 jobs:
-  # stages: [dev, stage, production]
-  # ports:  [3100, 3101, 3102]
-
-  deploy_dev:
+  deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    environment:
+      name: ${{ (github.ref == 'refs/heads/dev' && 'Development') || (github.ref == 'refs/heads/stage' && 'Staging') || (github.ref == 'refs/heads/main' && 'Production') }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: SSH into server and execute commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Load SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-          script: |
-            docker exec -t -u root nuxt-core-template_dev bash -c 'kill $(lsof -t -i:3100)'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && cp environments/dev.env .env'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm ci'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3100'
-            echo "Server run on 3100 port"
-            sleep 1
+      - name: Set environment specific variables
+        id: set-env
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+            echo "::set-output name=PORT::3100"
+            echo "::set-output name=ENVIRONMENT_NAME::dev"
+          elif [ "${{ github.ref }}" == "refs/heads/stage" ]; then
+            echo "::set-output name=PORT::3101"
+            echo "::set-output name=ENVIRONMENT_NAME::stage"
+          elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "::set-output name=PORT::3102"
+            echo "::set-output name=ENVIRONMENT_NAME::production"
+          fi
 
-  deploy_stage:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/stage'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: SSH into server and execute commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-          script: |
-            docker exec -t -u root nuxt-core-template_stage bash -c 'kill $(lsof -t -i:3101)'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && cp environments/stage.env .env'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm ci'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3101'
-            echo "Server run on 3101 port"
-            sleep 1
-
-  deploy_production:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: SSH into server and execute commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-          script: |
-            docker exec -t -u root nuxt-core-template_production bash -c 'kill $(lsof -t -i:3102)'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && cp environments/production.env .env'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm ci'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3102'
-            echo "Server run on 3102 port"
-            sleep 1
+      - name: Deploy to server
+        run: |
+          scp -r ./* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "export PORT=${{ steps.set-env.outputs.PORT }} ENVIRONMENT_NAME=${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && cd /home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && docker-compose down && docker-compose up -d --build"
+        env:
+          PORT: ${{ steps.set-env.outputs.PORT }}
+          ENVIRONMENT_NAME: ${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
