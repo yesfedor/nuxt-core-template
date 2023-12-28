@@ -15,3 +15,8 @@ services:
       - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
     volumes:
       - .:/home/project
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
