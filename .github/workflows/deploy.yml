@@ -8,13 +8,12 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  # stages: [dev, stage, production]
+  # ports:  [3100, 3101, 3102]
 
-    strategy:
-      matrix:
-        stage: [dev, stage, production]
-        # port: [3100, 3101, 3102]  # Настройте порты для каждого режима, если требуется
+  deploy_dev:
+    runs-on: ubuntu-latest
+    if: github.head_ref == 'dev'
 
     steps:
       - name: Checkout code
@@ -27,18 +26,56 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-          # Подставляем значения переменных окружения
           script: |
-            if [[ ${{ matrix.stage }} == "dev" ]]; then
-              port=3100
-            elif [[ ${{ matrix.stage }} == "stage" ]]; then
-              port=3101
-            elif [[ ${{ matrix.stage }} == "production" ]]; then
-              port=3102
-            fi
+            docker exec -t -u root nuxt-core-template_dev bash -c 'kill $(lsof -t -i:3100)'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && git pull'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm ci'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm run build'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && NITRO_PORT=3100 node .output/server/index.mjs'
 
-            docker exec -t -u root nuxt-core-template_${{ matrix.stage }} bash -c 'kill $(lsof -t -i:${port})'
-            docker exec -t -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && cp ./environments/${{ matrix.stage }}.env .env'
-            docker exec -t -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_${{ matrix.stage }} bash -c 'cd /home/project/ && NITRO_PORT=${port} node .output/server/index.mjs'
+  deploy_stage:
+    runs-on: ubuntu-latest
+    if: github.head_ref == 'stage'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH into server and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          script: |
+            docker exec -t -u root nuxt-core-template_stage bash -c 'kill $(lsof -t -i:3101)'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && git pull'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm ci'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm run build'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && NITRO_PORT=3101 node .output/server/index.mjs'
+
+  deploy_production:
+    runs-on: ubuntu-latest
+    if: github.head_ref == 'stage'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH into server and execute commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          script: |
+            docker exec -t -u root nuxt-core-template_production bash -c 'kill $(lsof -t -i:3102)'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && git pull'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm ci'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm run build'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && NITRO_PORT=3102 node .output/server/index.mjs'
