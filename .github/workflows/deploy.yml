@@ -33,6 +33,8 @@ jobs:
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3100'
+            echo "Server run on 3100 port"
+            sleep 1
 
   deploy_stage:
     runs-on: ubuntu-latest
@@ -56,6 +58,8 @@ jobs:
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3101'
+            echo "Server run on 3101 port"
+            sleep 1
 
   deploy_production:
     runs-on: ubuntu-latest
@@ -79,3 +83,5 @@ jobs:
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/environments/ && sh exec.sh 3102'
+            echo "Server run on 3102 port"
+            sleep 1
