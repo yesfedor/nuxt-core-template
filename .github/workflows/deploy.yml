@@ -29,7 +29,7 @@ jobs:
           script: |
             docker exec -t -u root nuxt-core-template_dev bash -c 'kill $(lsof -t -i:3100)'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && cp environments/dev.env .env'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && NITRO_PORT=3100 node .output/server/index.mjs'
@@ -52,7 +52,7 @@ jobs:
           script: |
             docker exec -t -u root nuxt-core-template_stage bash -c 'kill $(lsof -t -i:3101)'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && cp environments/stage.env .env'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && NITRO_PORT=3101 node .output/server/index.mjs'
@@ -75,7 +75,7 @@ jobs:
           script: |
             docker exec -t -u root nuxt-core-template_production bash -c 'kill $(lsof -t -i:3102)'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && git pull'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && cp environments/${{ matrix.stage }}.env .env'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && cp environments/production.env .env'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm run build'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && NITRO_PORT=3102 node .output/server/index.mjs'

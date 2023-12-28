@@ -7,7 +7,7 @@ When creating the template, many requests from businesses were taken into accoun
 ### About
 
 Thus, the following plugins are now configured and supported:
-1. DotEnv files in [./enviroments]() folder supported stage with balanced setting: local, dev, stage, prod
+1. DotEnv files in [./environments]() folder supported stage with balanced setting: local, dev, stage, prod
 2. Typescript 5 + Vue 3 + Nuxt 3
 3. Eslint, Stylelint (without lint-staged)
 4. SCSS
@@ -24,7 +24,7 @@ Thus, the following plugins are now configured and supported:
 
 ```shell
 nvm install && nvm use
-npm i && cp ./enviroments/local.env .env
+npm i && cp ./environments/local.env .env
 ```
 
 ---

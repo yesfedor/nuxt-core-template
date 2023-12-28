@@ -21,4 +21,4 @@ Make sure that Docker is installed on the server and the container image is avai
 ---
 ### Important!
 
-When changing `ports`, do not forget to change the values in ./enviroments/`stage`.env
+When changing `ports`, do not forget to change the values in ./environments/`stage`.env
