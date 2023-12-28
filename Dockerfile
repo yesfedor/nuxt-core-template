@@ -23,8 +23,4 @@ RUN npm ci
 
 RUN npm run build
 
-ENV PORT 3000
-
-EXPOSE $PORT
-
 CMD ["node", ".output/server/index.mjs"]
