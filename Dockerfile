@@ -1,4 +1,3 @@
-FROM node:18.16.1
 FROM alpine:latest
 
 ARG ENVIRONMENT_NAME
@@ -14,6 +13,8 @@ RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.c
 RUN git checkout
 
 RUN git pull
+
+FROM node:18.16.1
 
 COPY ./environments/${ENVIRONMENT_NAME}.env .env
 
