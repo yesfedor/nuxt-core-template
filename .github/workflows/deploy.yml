@@ -47,7 +47,7 @@ jobs:
       - name: Deploy to server
         run: |
           scp -r ./* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}:/home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
-          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "export BRANCH_NAME=${{ steps.set-env.outputs.BRANCH_NAME }} PORT=${{ steps.set-env.outputs.PORT }} ENVIRONMENT_NAME=${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && cd /home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && docker-compose down && docker-compose up -d --build --force-recreate"
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "export BRANCH_NAME=${{ steps.set-env.outputs.BRANCH_NAME }} PORT=${{ steps.set-env.outputs.PORT }} ENVIRONMENT_NAME=${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && cd /home/projects/nuxt-core-template-${{ steps.set-env.outputs.ENVIRONMENT_NAME }} && docker-compose down && docker-compose up -d --force-recreate"
         env:
           PORT: ${{ steps.set-env.outputs.PORT }}
           ENVIRONMENT_NAME: ${{ steps.set-env.outputs.ENVIRONMENT_NAME }}
