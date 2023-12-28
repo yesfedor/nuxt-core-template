@@ -13,7 +13,7 @@ jobs:
 
   deploy_dev:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
+    if: github.event.pull_request.base.ref == 'dev'
 
     steps:
       - name: Checkout code
@@ -32,11 +32,11 @@ jobs:
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && cp environments/dev.env .env'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && NITRO_PORT=3100 nohup node .output/server/index.mjs > /dev/null 2>&1 &'
+            docker exec -t -u root nuxt-core-template_dev bash -c 'cd /home/project/ && NITRO_PORT=3100 nohup node .output/server/index.mjs > /dev/null 2>&1 & disown'
 
   deploy_stage:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/stage'
+    if: github.event.pull_request.base.ref == 'stage'
 
     steps:
       - name: Checkout code
@@ -55,11 +55,11 @@ jobs:
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && cp environments/stage.env .env'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && NITRO_PORT=3101 nohup node .output/server/index.mjs > /dev/null 2>&1 &'
+            docker exec -t -u root nuxt-core-template_stage bash -c 'cd /home/project/ && NITRO_PORT=3101 nohup node .output/server/index.mjs > /dev/null 2>&1 & disown'
 
   deploy_production:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event.pull_request.base.ref == 'main'
 
     steps:
       - name: Checkout code
@@ -78,4 +78,4 @@ jobs:
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && cp environments/production.env .env'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm ci'
             docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && npm run build'
-            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && NITRO_PORT=3102 nohup node .output/server/index.mjs > /dev/null 2>&1 &'
+            docker exec -t -u root nuxt-core-template_production bash -c 'cd /home/project/ && NITRO_PORT=3102 nohup node .output/server/index.mjs > /dev/null 2>&1 & disown'
