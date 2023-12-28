@@ -13,6 +13,7 @@ services:
       - "${PORT}:3000"
     environment:
       - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - .:/home/project
 

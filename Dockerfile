@@ -23,10 +23,8 @@ RUN npm ci
 
 RUN npm run build
 
-RUN ls -la /home/project/.output/server/
-
-RUN ls -la .output/server/
+COPY . .
 
 EXPOSE 3000
 
-CMD ["node", ".output/server/index.mjs"]
+ENTRYPOINT ["node", ".output/server/index.mjs"]
