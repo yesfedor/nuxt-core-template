@@ -10,17 +10,14 @@ RUN apk update && apk add --no-cache git
 
 RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.com/yesfedor/nuxt-core-template.git ."
 
-RUN git checkout
-
-RUN git pull
-
 FROM node:18.16.1
+ARG ENVIRONMENT_NAME
 
 COPY --from=prepare-stage /home/project /home/project
 
 WORKDIR /home/project
 
-COPY ./environments/${ENVIRONMENT_NAME}.env .env
+RUN /bin/sh -c "cp ./environments/${ENVIRONMENT_NAME}.env .env"
 
 RUN npm ci
 
