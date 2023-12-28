@@ -5,7 +5,7 @@
     </h1>
     <nuxt-icon name="reorder" filled />
     <p>This will be merged into the master.</p>
-    <p>This is production: Nuxt Core Template v3.9.0 with dockerized v13</p>
+    <p>This is production: Nuxt Core Template v3.9.0 with dockerized v14</p>
   </div>
 </template>
 
