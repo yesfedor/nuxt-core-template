@@ -13,7 +13,7 @@ jobs:
 
   deploy_dev:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'dev'
+    if: github.event.pull_request.base.ref == 'dev'
 
     steps:
       - name: Checkout code
@@ -36,7 +36,7 @@ jobs:
 
   deploy_stage:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'stage'
+    if: github.event.pull_request.base.ref == 'stage'
 
     steps:
       - name: Checkout code
@@ -59,7 +59,7 @@ jobs:
 
   deploy_production:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'main'
+    if: github.event.pull_request.base.ref == 'main'
 
     steps:
       - name: Checkout code
