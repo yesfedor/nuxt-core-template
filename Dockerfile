@@ -5,7 +5,7 @@ ARG BRANCH_NAME
 
 ENV BRANCH_NAME=${BRANCH_NAME}
 
-WORKDIR /home/project
+WORKDIR /app
 
 RUN apk update && apk add --no-cache git
 
@@ -19,9 +19,9 @@ ARG ENVIRONMENT_NAME
 
 ENV ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
 
-COPY --from=prepare-stage /home/project /home/project
+COPY --from=prepare-stage /app /app
 
-WORKDIR /home/project
+WORKDIR /app
 
 RUN /bin/sh -c "cp ./environments/${ENVIRONMENT_NAME}.env .env"
 

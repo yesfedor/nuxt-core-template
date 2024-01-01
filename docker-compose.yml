@@ -14,8 +14,6 @@ services:
     environment:
       - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
       - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - .:/home/project
 
 networks:
   default:
