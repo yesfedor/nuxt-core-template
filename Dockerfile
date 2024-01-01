@@ -2,6 +2,7 @@ FROM alpine:latest AS prepare-stage
 
 ARG ENVIRONMENT_NAME
 ARG BRANCH_NAME
+
 ENV BRANCH_NAME=${BRANCH_NAME}
 
 WORKDIR /home/project
@@ -10,8 +11,13 @@ RUN apk update && apk add --no-cache git
 
 RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.com/yesfedor/nuxt-core-template.git ."
 
+COPY . .
+
 FROM node:18.16.1
+
 ARG ENVIRONMENT_NAME
+
+ENV ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
 
 COPY --from=prepare-stage /home/project /home/project
 
@@ -25,6 +31,8 @@ RUN npm run build
 
 COPY . .
 
+RUN /sh -c "ls -a"
+
 EXPOSE 3000
 
-ENTRYPOINT ["node", ".output/server/index.mjs"]
+CMD ["node", ".output/server/index.mjs"]
