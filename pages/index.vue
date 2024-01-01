@@ -5,7 +5,8 @@
     </h1>
     <nuxt-icon name="reorder" filled />
     <p>This will be merged into the master.</p>
-    <p>This is production: Nuxt Core Template v3.9.0 with dockerized v28</p>
+    <p>This is production: Nuxt Core Template v3.9.0</p>
+    <p>Host: {{ baseUrl }}</p>
   </div>
 </template>
 
@@ -13,6 +14,9 @@
 definePageMeta({
   layout: 'default',
 })
+
+const config = useRuntimeConfig()
+const baseUrl = ref(config.public.BASE_URL)
 </script>
 
 <style lang="scss">
