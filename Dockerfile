@@ -31,7 +31,7 @@ RUN npm run build
 
 COPY . .
 
-RUN /sh -c "ls -a"
+RUN /bin/sh -c "ls -a"
 
 EXPOSE 3000
 
