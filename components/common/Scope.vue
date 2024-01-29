@@ -1,6 +1,6 @@
 <template>
-  <section class="app-global-scope">
-    <NuxtLoadingIndicator />
+  <section class="app-common-scope">
+    <NuxtLoadingIndicator :throttle="0" />
     <slot />
   </section>
 </template>
