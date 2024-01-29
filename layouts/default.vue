@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="app-layout">
     <slot />
-    <AppGlobalScope />
   </div>
 </template>
 

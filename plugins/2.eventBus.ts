@@ -1,5 +1,4 @@
 // Doc: https://github.com/developit/mitt
-import { consola } from 'consola'
 import mitt from 'mitt'
 
 export type ApplicationEvents = {
@@ -13,13 +12,14 @@ export type ApplicationEvents = {
 
 export default defineNuxtPlugin(({ $config }) => {
   const emitter = mitt<ApplicationEvents>()
+  const logger = useConsole()
 
   if (!$config.public.APP_IS_PROD && $config.public.APP_DEBUG) {
     emitter.on('*', (type, e: unknown) => {
       if (e) {
-        consola.info(`[$bus]: ${type}`, e)
+        logger.info('bus', `${type}`, e)
       } else {
-        consola.info(`[$bus]: ${type}`)
+        logger.info('bus', `${type}`)
       }
     })
   }

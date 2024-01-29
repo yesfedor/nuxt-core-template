@@ -49,6 +49,7 @@ module.exports = {
 
     // Typescript
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
 
     // Vue / Nuxt
     'vue/no-v-html': 'warn',
