@@ -1,9 +1,4 @@
-import { defineNuxtPlugin } from '#app'
-import { useGlobalStore } from '~/stores'
-import { useServerOnlyAsync } from '~/composables/useServerOnly'
-import { useClientOnlyAsync } from '~/composables/useClientOnly'
-
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin(async ({ $config }) => {
   // deps
   const globalStore = useGlobalStore()
 
@@ -24,7 +19,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   // app:server
   await useServerOnlyAsync(initializationServerOnly)
-  if (!nuxtApp.$config.public.NUXT_SSR) {
+  if (!$config.public.NUXT_SSR) {
     await initializationServerOnly()
   }
 
