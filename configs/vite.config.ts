@@ -1,7 +1,7 @@
 import eslintPlugin from 'vite-plugin-eslint'
 import type { NuxtOptions } from '@nuxt/schema'
 
-export default {
+export default <Partial<NuxtOptions['vite']>> {
   build: {
     assetsDir: 'static/'
   },
@@ -24,4 +24,4 @@ export default {
       host: '0.0.0.0',
     },
   },
-} as NuxtOptions['vite']
+}

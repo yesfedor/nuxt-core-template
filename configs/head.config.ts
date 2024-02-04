@@ -1,6 +1,6 @@
 import type { NuxtOptions } from '@nuxt/schema'
 
-export default {
+export default <Partial<NuxtOptions['app']['head']>> {
   title: process.env.NUXT_BASE_TITLE,
   meta: [
     {
@@ -27,4 +27,4 @@ export default {
   style: [],
   script: [],
   noscript: [],
-} as NuxtOptions['app']['head']
+}

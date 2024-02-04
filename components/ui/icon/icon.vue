@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { TUiIconNames } from "#build/types/ui-icon"
+import type { TUiIconNames } from '#build/types/ui-icon'
 
 interface Props {
   name: TUiIconNames
