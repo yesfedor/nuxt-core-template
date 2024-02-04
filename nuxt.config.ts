@@ -1,7 +1,8 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import viteConfig from './configs/vite.config'
+
 import headConfig from './configs/head.config'
 import experimentalConfig from './configs/experimental.config'
+import viteConfig from './configs/vite.config'
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
