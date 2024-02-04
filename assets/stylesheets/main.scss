@@ -1,8 +1,25 @@
+/* 1. abstracts */
 @import "abstracts/functions";
 @import "abstracts/helpers";
 @import "abstracts/mixins";
 @import "abstracts/variables";
 
+/* 2. vendors */
+@import "vendors/base";
+
+/* 3. base */
 @import "base/animations";
 @import "base/base";
+@import "base/reset";
 @import "base/typography";
+
+/* 4. partials - layout */
+
+/* 5. modules - components */
+
+/* 6. pages */
+
+/* 7. themes */
+
+/* 8. shame */
+@import "shame";
