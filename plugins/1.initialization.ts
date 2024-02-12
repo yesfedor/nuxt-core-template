@@ -1,28 +1,33 @@
-export default defineNuxtPlugin(async ({ $config }) => {
-  // deps
-  const globalStore = useGlobalStore()
+export default defineNuxtPlugin({
+  name: 'app:initialization',
+  dependsOn: ['app:eventBus'],
 
-  async function initializationGlobal() {
-    await globalStore.initializationGlobal()
-  }
+  async setup({ $config }) {
+    // deps
+    const globalStore = useGlobalStore()
 
-  async function initializationServerOnly() {
-    await globalStore.initializationServerOnly()
-  }
+    async function initializationGlobal() {
+      await globalStore.initializationGlobal()
+    }
 
-  async function initializationClientOnly() {
-    await globalStore.initializationClientOnly()
-  }
+    async function initializationServerOnly() {
+      await globalStore.initializationServerOnly()
+    }
 
-  // app:global
-  await initializationGlobal()
+    async function initializationClientOnly() {
+      await globalStore.initializationClientOnly()
+    }
 
-  // app:server
-  await useServerOnlyAsync(initializationServerOnly)
-  if (!$config.public.NUXT_SSR) {
-    await initializationServerOnly()
-  }
+    // app:global
+    await initializationGlobal()
 
-  // app:client
-  await useClientOnlyAsync(initializationClientOnly)
+    // app:server
+    await useServerOnlyAsync(initializationServerOnly)
+    if (!$config.public.NUXT_SSR) {
+      await initializationServerOnly()
+    }
+
+    // app:client
+    await useClientOnlyAsync(initializationClientOnly)
+  },
 })

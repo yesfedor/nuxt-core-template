@@ -10,27 +10,31 @@ export type ApplicationEvents = {
   'app:layout:mounted': void
 }
 
-export default defineNuxtPlugin(({ $config }) => {
-  const emitter = mitt<ApplicationEvents>()
-  const logger = useConsole()
+export default defineNuxtPlugin({
+  name: 'app:eventBus',
 
-  if (!$config.public.APP_IS_PROD && $config.public.APP_DEBUG) {
-    emitter.on('*', (type, e: unknown) => {
-      if (e) {
-        logger.info('bus', `${type}`, e)
-      } else {
-        logger.info('bus', `${type}`)
-      }
-    })
-  }
+  async setup({ $config }) {
+    const emitter = mitt<ApplicationEvents>()
+    const logger = useConsole()
 
-  return {
-    provide: {
-      bus: {
-        emit: emitter.emit,
-        on: emitter.on,
-        off: emitter.off,
+    if (!$config.public.APP_IS_PROD && $config.public.APP_DEBUG) {
+      emitter.on('*', (type, e: unknown) => {
+        if (e) {
+          logger.info('bus', `${type}`, e)
+        } else {
+          logger.info('bus', `${type}`)
+        }
+      })
+    }
+
+    return {
+      provide: {
+        bus: {
+          emit: emitter.emit,
+          on: emitter.on,
+          off: emitter.off,
+        },
       },
-    },
-  }
+    }
+  },
 })
