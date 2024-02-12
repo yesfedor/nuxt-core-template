@@ -1,8 +1,8 @@
 /* 1. abstracts */
-@import "abstracts/functions";
-@import "abstracts/helpers";
-@import "abstracts/mixins";
 @import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/helpers";
 
 /* 2. vendors */
 @import "vendors/base";
