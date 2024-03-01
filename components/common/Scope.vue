@@ -1,6 +1,6 @@
 <template>
   <section class="app-common-scope">
-    <NuxtLoadingIndicator :throttle="0" />
+    <NuxtLoadingIndicator :throttle="0" :duration="5e3" />
   </section>
 </template>
 
