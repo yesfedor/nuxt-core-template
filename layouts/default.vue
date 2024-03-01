@@ -1,5 +1,5 @@
 <template>
-  <layout-provider #default="{ contentClasses }">
+  <layout-provider v-slot="{ contentClasses }">
     <div class="app-layout app-layout--default">
       <div :class="contentClasses" class="app-layout__content">
         <slot />
