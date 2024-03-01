@@ -1,19 +1,62 @@
-import viteConfig from './configs/vite.config'
+import { defineNuxtConfig } from 'nuxt/config'
+
 import headConfig from './configs/head.config'
 import experimentalConfig from './configs/experimental.config'
+import viteConfig from './configs/vite.config'
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
-  runtimeConfig: {
-    public: {
-      BASE_URL: String(process.env.BASE_URL),
-      APP_DEBUG: Boolean(process.env.APP_DEBUG),
-      APP_IS_PROD: Boolean(process.env.APP_IS_PROD),
-      DEBUG: Boolean(process.env.DEBUG),
-    },
+  app: {
+    head: headConfig,
   },
-  css: ['~/assets/stylesheets/main.scss'],
-  ssr: Boolean(process.env.NUXT_SSR),
+  components: {
+    dirs: [
+      {
+        path: '~/components/common',
+        pathPrefix: true,
+        prefix: 'Common',
+      },
+      {
+        path: '~/components/layout',
+        pathPrefix: true,
+        prefix: 'Layout',
+      },
+      {
+        path: '~/components/ui',
+        pathPrefix: true,
+        prefix: 'Ui',
+      },
+    ],
+  },
+  css: [
+    '~/assets/stylesheets/main.scss',
+  ],
+  devServer: {
+    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
+    port: Number(process.env.NITRO_DEV_PORT) || 3000,
+  },
+  devtools: {
+    enabled: Boolean(process.env.APP_DEVTOOLS),
+  },
+  experimental: experimentalConfig,
+  i18n: {
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      useCookie: true,
+    },
+    langDir: 'locales',
+    lazy: true,
+    locales: [
+      {
+        code: 'en',
+        file: 'en.ts',
+      },
+    ],
+    strategy: 'prefix_except_default',
+    vueI18n: './configs/i18n.config.ts',
+  },
   modules: [
     // https://github.com/nuxt-modules/stylelint
     '@nuxtjs/stylelint-module',
@@ -28,15 +71,11 @@ export default defineNuxtConfig({
     'nuxt-icons',
     // https://v8.i18n.nuxtjs.org/options/vue-i18n
     '@nuxtjs/i18n',
+    // https://nuxt.com/modules/device
+    '@nuxtjs/device',
   ],
-  components: {
-    dirs: [
-      {
-        prefix: 'App',
-        path: '~/components',
-        pathPrefix: true,
-      },
-    ],
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
   postcss: {
     plugins: {
@@ -46,40 +85,18 @@ export default defineNuxtConfig({
       },
     },
   },
-  experimental: experimentalConfig,
-  devtools: {
-    enabled: Boolean(process.env.APP_DEVTOOLS),
-  },
-  devServer: {
-    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
-    port: Number(process.env.NITRO_DEV_PORT) || 3000,
-  },
   pwa: {
     strategies: 'generateSW',
   },
-  pinia: {
-    storesDirs: ['./stores/**'],
-  },
-  i18n: {
-    vueI18n: './configs/i18n.config.ts',
-    strategy: 'prefix_except_default',
-    lazy: true,
-    langDir: 'locales',
-    defaultLocale: 'en',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
+  runtimeConfig: {
+    public: {
+      APP_DEBUG: Boolean(process.env.APP_DEBUG),
+      APP_IS_PROD: Boolean(process.env.APP_IS_PROD),
+      BASE_URL: String(process.env.BASE_URL),
+      DEBUG: Boolean(process.env.DEBUG),
+      NUXT_SSR: Boolean(process.env.NUXT_SSR),
     },
-    locales: [
-      {
-        code: 'en',
-        file: 'en.ts',
-      },
-    ],
   },
-  app: {
-    head: headConfig,
-  },
+  ssr: Boolean(process.env.NUXT_SSR),
   vite: viteConfig,
 })

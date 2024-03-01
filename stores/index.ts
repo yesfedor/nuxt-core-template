@@ -1,6 +1,3 @@
-import { defineStore } from 'pinia'
-import { consola } from 'consola'
-
 export const useGlobalStore = defineStore('globalStore', {
   state: () => {
     return {
@@ -8,16 +5,14 @@ export const useGlobalStore = defineStore('globalStore', {
     }
   },
   actions: {
-    initializationGlobal() {
-      // get runtimeConfig from be-side, and basic info for header, footer, left menu
-      consola.info('[globalStore]: init')
+    async initializationGlobal() {
+      useConsole().info('globalStore', 'init')
     },
-    initializationServerOnly() {
-      consola.info('[globalStore]: server init')
+    async initializationServerOnly() {
+      useConsole().info('globalStore', 'server init')
     },
-    initializationClientOnly() {
-      // get user data & check auth & validate tokens
-      consola.info('[globalStore]: client init')
+    async initializationClientOnly() {
+      useConsole().info('globalStore', 'client init')
     },
   },
 })

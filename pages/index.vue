@@ -3,8 +3,11 @@
     <h1 class="app-page-home__title">
       {{ $t('welcome') }}
     </h1>
-    <nuxt-icon name="reorder" filled />
-    <p>This is production: Nuxt Core Template v3.9.0</p>
+
+    <ui-icon name="reorder" filled />
+
+    <p>This is production: Nuxt Core Template v3.10.0</p>
+
     <p>Host: {{ baseUrl }}</p>
   </div>
 </template>
