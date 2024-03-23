@@ -13,7 +13,7 @@ RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.c
 
 COPY . .
 
-FROM node:18.16.1
+FROM node:20.11.1
 
 ARG ENVIRONMENT_NAME
 
