@@ -7,7 +7,8 @@ module.exports = {
     {
       'files': ['*.scss', '*.vue', '**/*.vue'],
       'rules': {
-        'at-rule-empty-line-before': 'off',
+        'at-rule-empty-line-before': null,
+        'scss/dollar-variable-empty-line-before': null,
       },
     },
   ],
