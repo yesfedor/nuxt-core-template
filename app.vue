@@ -1,12 +1,12 @@
 <template>
   <div class="app-root">
-    <NuxtPwaManifest />
+    <nuxt-pwa-manifest />
 
-    <NuxtLayout fallback="default">
-      <NuxtPage />
-    </NuxtLayout>
+    <nuxt-layout fallback="default">
+      <nuxt-page />
+    </nuxt-layout>
 
-    <CommonScope />
+    <core-scope />
   </div>
 </template>
 
