@@ -1,14 +1,14 @@
 <template>
   <div class="app-root app-root--error">
-    <NuxtPwaManifest />
+    <nuxt-pwa-manifest />
 
-    <NuxtLayout name="default">
+    <nuxt-layout name="default">
       <pre>
         {{ error.message }}
       </pre>
-    </NuxtLayout>
+    </nuxt-layout>
 
-    <CommonScope />
+    <core-scope />
   </div>
 </template>
 
