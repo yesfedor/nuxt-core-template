@@ -1,7 +1,7 @@
 <template>
-  <layout-provider v-slot="{ contentClasses }">
+  <layout-provider>
     <div class="app-layout app-layout--default">
-      <div :class="contentClasses" class="app-layout__content">
+      <div class="app-layout__content">
         <slot />
       </div>
     </div>
