@@ -21,7 +21,7 @@ Thus, the following plugins are now configured and supported:
 ---
 ### Special modifications
 1. A `<ui-icon>` component has been created that covers the functionality of nuxt-icon. There is also a module written for it that scans the ~/assets/icon folder and generates a `types` based on the files. Adds hints to the icon name when using the component
-2. A `<common-scope>` is a "god" component, it avoids duplication of initialization code and is a repository of the necessary components throughout the application.
+2. A `<core-scope>` is a "god" component, it avoids duplication of initialization code and is a repository of the necessary components throughout the application.
 3. Plugin `1.initialization.ts` - initialization you're app here - validate token, request the site configuration, etc.
 4. Plugin `2.eventBus.ts` - wrapper over the `mitt` package for convenient use
 

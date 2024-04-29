@@ -1,7 +1,7 @@
 <template>
-  <layout-provider #default="{ contentClasses }">
+  <layout-provider>
     <div class="app-layout app-layout--clear">
-      <div :class="contentClasses" class="app-layout__content">
+      <div class="app-layout__content">
         <slot />
       </div>
     </div>
