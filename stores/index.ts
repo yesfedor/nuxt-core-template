@@ -16,3 +16,7 @@ export const useGlobalStore = defineStore('globalStore', {
     },
   },
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useGlobalStore, import.meta.hot))
+}
