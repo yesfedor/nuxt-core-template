@@ -1,15 +1,15 @@
 <template>
-  <div class="app-root app-root--error">
-    <nuxt-pwa-manifest />
+	<div class="app-root app-root--error">
+		<nuxt-pwa-manifest />
 
-    <nuxt-layout name="default">
-      <pre>
+		<nuxt-layout name="default">
+			<pre>
         {{ error.message }}
       </pre>
-    </nuxt-layout>
+		</nuxt-layout>
 
-    <core-scope />
-  </div>
+		<core-scope />
+	</div>
 </template>
 
 <script lang="ts" setup>

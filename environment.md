@@ -19,6 +19,7 @@ When a pull request is created to one of the specified branches (`dev`, `stage`,
 Make sure that Docker is installed on the server and the container image is available. Also, don't forget to add secrets on your GitHub repository settings page to specify values for `SERVER_HOST`, `SERVER_USERNAME` and `SSH_PRIVATE_KEY`.
 
 ---
+
 ### Important!
 
 When changing `ports`, do not forget to change the values in ./environments/`stage`.env

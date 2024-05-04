@@ -1,13 +1,13 @@
 root = true
 
 [*]
-indent_size = 2
-indent_style = tab
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
+end_of_line = lf
+tab_width = 2
+indent_style = tab
 max_line_length = 120
+insert_final_newline = true
+trim_trailing_whitespace = true
 ij_html_space_inside_empty_tag = true
 
 [*.md]
