@@ -47,8 +47,8 @@ export default defineNuxtConfig({
     vueI18n: './configs/i18n.config.ts',
   },
   modules: [
-    // https://github.com/nuxt-modules/stylelint
-    '@nuxtjs/stylelint-module',
+		// https://eslint.nuxt.com/packages/module
+		'@nuxt/eslint',
     // https://nuxt.com/modules/pinia
     '@pinia/nuxt',
     // https://nuxt.com/modules/vite-pwa-nuxt
@@ -63,6 +63,12 @@ export default defineNuxtConfig({
     // https://nuxt.com/modules/device
     '@nuxtjs/device',
   ],
+	eslint: {
+		config: {
+			standalone: false,
+		},
+		checker: true,
+	},
   pinia: {
     storesDirs: ['./stores/**'],
   },

@@ -25,8 +25,8 @@ export default defineNuxtModule({
     const filenames = readAllFiles(iconsDir)
 
     const iconKeys = Array.from(filenames)
-      .filter(filePath => filePath.endsWith('.svg'))
-      .map(filePath => {
+      .filter((filePath) => filePath.endsWith('.svg'))
+      .map((filePath) => {
         const path = filePath
           .replace(/\\/g, '/')
           .replace('.svg', '')

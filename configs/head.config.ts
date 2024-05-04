@@ -21,7 +21,7 @@ export default <Partial<NuxtOptions['app']['head']>> {
     {
       name: 'theme-color',
       content: String(process.env.NUXT_PUBLIC_APP_THEME_COLOR),
-    }
+    },
   ],
   link: [],
   style: [],
