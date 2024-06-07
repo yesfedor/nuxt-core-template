@@ -31,6 +31,7 @@ export default withNuxt(
 			'vue/block-order': ['error', {
 				order: [['template', 'script'], 'style'],
 			}],
+			'unused-imports/no-unused-vars': 'off',
 		},
 	}),
 	// ...your other rules
