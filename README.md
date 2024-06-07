@@ -28,6 +28,7 @@ Thus, the following plugins are now configured and supported:
 2. A `<core-scope>` is a "god" component, it avoids duplication of initialization code and is a repository of the necessary components throughout the application.
 3. Plugin `1.initialization.ts` - initialization you're app here - validate token, request the site configuration, etc.
 4. Plugin `2.eventBus.ts` - wrapper over the `mitt` package for convenient use
+5. A `app/api` api folder support auto-imports a.k.a composable, for details see [homepage](./app/pages/index.vue)
 
 ---
 

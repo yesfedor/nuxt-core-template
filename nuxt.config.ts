@@ -6,12 +6,6 @@ import viteConfig from './configs/vite.config'
 
 export default defineNuxtConfig({
 	// https://nuxt.com/docs/api/configuration/nuxt-config
-	srcDir: './app',
-	imports: {
-		dirs: [
-			'./api',
-		],
-	},
 	app: {
 		head: headConfig,
 	},
@@ -58,6 +52,11 @@ export default defineNuxtConfig({
 		strategy: 'prefix_except_default',
 		vueI18n: './configs/i18n.config.ts',
 	},
+	imports: {
+		dirs: [
+			'./api',
+		],
+	},
 	modules: [
 		// https://eslint.nuxt.com/packages/module
 		'@nuxt/eslint',
@@ -99,6 +98,7 @@ export default defineNuxtConfig({
 			NUXT_SSR: Boolean(process.env.NUXT_SSR),
 		},
 	},
+	srcDir: './app',
 	ssr: Boolean(process.env.NUXT_SSR),
 	vite: viteConfig,
 })
