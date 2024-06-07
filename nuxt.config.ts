@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import vuetify from 'vite-plugin-vuetify'
 
 import headConfig from './configs/head.config'
 import experimentalConfig from './configs/experimental.config'
@@ -8,6 +9,11 @@ export default defineNuxtConfig({
 	// https://nuxt.com/docs/api/configuration/nuxt-config
 	app: {
 		head: headConfig,
+	},
+	build: {
+		transpile: [
+			'vuetify',
+		],
 	},
 	components: {
 		dirs: [
@@ -73,6 +79,16 @@ export default defineNuxtConfig({
 		'@nuxtjs/i18n',
 		// https://nuxt.com/modules/device
 		'@nuxtjs/device',
+		// https://vuetifyjs.com/en/getting-started/installation/#using-nuxt-3
+		(_options, nuxt) => {
+			nuxt.hooks.hook('vite:extendConfig', (config) => {
+				// eslint-disable-next-line ts/ban-ts-comment
+				// @ts-expect-error
+				config.plugins.push(vuetify({
+					autoImport: true,
+				}))
+			})
+		},
 	],
 	pinia: {
 		storesDirs: ['./app/stores/**'],

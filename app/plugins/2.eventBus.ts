@@ -8,6 +8,7 @@ export type ApplicationEvents = {
 	 */
 	'app:layout:created': void
 	'app:layout:mounted': void
+	'app:navigation-drawer:toggle': void
 }
 
 export default defineNuxtPlugin({

@@ -32,6 +32,8 @@ export default withNuxt(
 				order: [['template', 'script'], 'style'],
 			}],
 			'unused-imports/no-unused-vars': 'off',
+			'vue/html-indent': 'off',
+			'vue/singleline-html-element-content-newline': ['off'],
 		},
 	}),
 	// ...your other rules
