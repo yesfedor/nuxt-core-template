@@ -5,4 +5,5 @@ export default <Partial<NuxtOptions['experimental']>>{
 	asyncEntry: true,
 	inlineSSRStyles: false,
 	sharedPrerenderData: true,
+	payloadExtraction: true,
 }

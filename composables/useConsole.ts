@@ -1,15 +1,7 @@
 import { consola } from 'consola'
 
-export default function useConsole() {
+export function useConsole() {
 	const nuxtApp = useRuntimeConfig()
-	const consolaInstance = useState('consola', () => consola.create({
-		level: 1,
-		throttle: 1000,
-		formatOptions: {
-			date: true,
-			colors: true,
-		},
-	}))
 
 	const canConsole = () => {
 		return nuxtApp.public.APP_DEBUG && !nuxtApp.public.APP_IS_PROD
@@ -20,7 +12,7 @@ export default function useConsole() {
 		if (!canConsole()) {
 			return false
 		}
-		consolaInstance.value[type](`[${structure}]: ${message}`, ...args)
+		consola[type](`[${structure}]: ${message}`, ...args)
 		return true
 	}
 
