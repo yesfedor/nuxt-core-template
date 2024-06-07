@@ -6,6 +6,12 @@ import viteConfig from './configs/vite.config'
 
 export default defineNuxtConfig({
 	// https://nuxt.com/docs/api/configuration/nuxt-config
+	srcDir: './app',
+	imports: {
+		dirs: [
+			'./api',
+		],
+	},
 	app: {
 		head: headConfig,
 	},
@@ -26,6 +32,12 @@ export default defineNuxtConfig({
 	},
 	devtools: {
 		enabled: Boolean(process.env.APP_DEVTOOLS),
+	},
+	eslint: {
+		config: {
+			standalone: false,
+		},
+		checker: true,
 	},
 	experimental: experimentalConfig,
 	i18n: {
@@ -63,14 +75,8 @@ export default defineNuxtConfig({
 		// https://nuxt.com/modules/device
 		'@nuxtjs/device',
 	],
-	eslint: {
-		config: {
-			standalone: false,
-		},
-		checker: true,
-	},
 	pinia: {
-		storesDirs: ['./stores/**'],
+		storesDirs: ['./app/stores/**'],
 	},
 	postcss: {
 		plugins: {
@@ -81,6 +87,7 @@ export default defineNuxtConfig({
 		},
 	},
 	pwa: {
+		manifest: false,
 		strategies: 'generateSW',
 	},
 	runtimeConfig: {

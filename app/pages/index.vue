@@ -9,6 +9,11 @@
 		<p>This is production: Nuxt Core Template v3.11.2</p>
 
 		<p>Host: {{ baseUrl }}</p>
+
+		<template v-if="firstCat?.id">
+			<p>Your unique cat</p>
+			<img :src="firstCat.url" :alt="firstCat.id" class="app-page-home__cat">
+		</template>
 	</div>
 </template>
 
@@ -19,6 +24,10 @@ definePageMeta({
 
 const config = useRuntimeConfig()
 const baseUrl = ref(config.public.BASE_URL)
+
+// example use auto import api folder
+const cats = useAsyncData('api:cats', async () => await apiGetImageFromTheCatApi())
+const firstCat = computed(() => cats.data.value ? cats.data.value[0] : null)
 </script>
 
 <style lang="scss">
@@ -29,6 +38,12 @@ const baseUrl = ref(config.public.BASE_URL)
 
 	&__title {
 		color: #00dc82;
+	}
+
+	&__cat {
+		max-width: 50vw;
+		max-height: 50vh;
+		object-fit: cover;
 	}
 }
 </style>

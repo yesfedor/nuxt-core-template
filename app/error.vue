@@ -3,7 +3,7 @@
 		<nuxt-pwa-manifest />
 
 		<nuxt-layout name="default">
-			<pre>
+			<pre v-if="error">
         {{ error.message }}
       </pre>
 		</nuxt-layout>
