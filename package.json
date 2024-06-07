@@ -17,9 +17,9 @@
 		"upgrade": "npx nuxi upgrade -f",
 		"cleanup": "npx nuxi cleanup"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@antfu/eslint-config": "^2.16.1",
+		"@mdi/font": "^7.4.47",
 		"@nuxt/devtools": "latest",
 		"@nuxt/eslint": "^0.3.10",
 		"@nuxtjs/device": "^3.1.1",
@@ -42,8 +42,10 @@
 		"postcss-html": "^1.6.0",
 		"sass": "^1.72.0",
 		"vite-plugin-eslint2": "^4.4.0",
+		"vite-plugin-vuetify": "^2.0.3",
 		"vue": "^3.4.21",
-		"vue-router": "^4.3.0"
+		"vue-router": "^4.3.0",
+		"vuetify": "^3.6.8"
 	},
 	"overrides": {
 		"@nuxt/eslint": {
