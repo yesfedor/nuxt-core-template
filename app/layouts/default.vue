@@ -1,22 +1,16 @@
 <template>
 	<layout-provider>
-		<v-app key="v-app">
+		<v-app>
 			<layout-base-system-bar />
 
 			<client-only>
 				<layout-base-aside />
+				<layout-base-header />
 			</client-only>
 
-			<layout-base-header />
-
-			<v-main key="v-main">
+			<v-main>
 				<v-divider />
-
-				<v-row>
-					<v-col class="mt-5">
-						<slot />
-					</v-col>
-				</v-row>
+				<slot />
 			</v-main>
 		</v-app>
 	</layout-provider>

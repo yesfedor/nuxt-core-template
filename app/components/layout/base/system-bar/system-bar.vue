@@ -1,11 +1,23 @@
 <template>
 	<v-system-bar class="grey-lighten-4 px-5">
-		<span>Hello, <strong>username</strong></span>
+		<v-icon class="pe-5" icon="mdi-circle" />
+		<strong>Dashboard</strong>
+
 		<v-spacer />
-		<span class="px-5">{{ date }}</span>
-		<v-icon class="grey-darken-4">mdi-square</v-icon>
-		<v-icon class="grey-darken-4">mdi-circle</v-icon>
-		<v-icon class="grey-darken-4">mdi-triangle</v-icon>
+
+		<div class="cursor-pointer px-5">
+			<span>{{ date }}</span>
+			<v-overlay
+				activator="parent"
+				location-strategy="connected"
+				scroll-strategy="close"
+			>
+				<v-date-picker :title="`Today: ${date}`" />
+			</v-overlay>
+		</div>
+		<v-icon class="cursor-pointer grey-darken-4">mdi-square</v-icon>
+		<v-icon class="cursor-pointer grey-darken-4 mx-1">mdi-circle</v-icon>
+		<v-icon class="cursor-pointer grey-darken-4">mdi-triangle</v-icon>
 	</v-system-bar>
 </template>
 
@@ -16,7 +28,7 @@ const timerId = ref<NodeJS.Timeout>()
 const time = ref(Date.now())
 
 const date = computed(() => {
-	return moment(time.value).format('dddd, hh:mm')
+	return moment(time.value).format('Do, hh:mm A')
 })
 
 function updateTime() {

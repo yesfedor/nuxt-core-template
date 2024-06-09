@@ -22,7 +22,7 @@ const config = useRuntimeConfig()
 const baseUrl = ref(config.public.BASE_URL)
 
 // example use auto import api folder
-const cats = await useAsyncData('api:cats', async () => await apiGetImageFromTheCatApi())
+const cats = await useAsyncData('api:cats', apiGetImageFromTheCatApi)
 const firstCat = computed(() => cats.data.value ? cats.data.value[0] : null)
 </script>
 
