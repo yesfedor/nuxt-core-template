@@ -27,6 +27,9 @@ export default defineNuxtConfig({
 	devtools: {
 		enabled: Boolean(process.env.APP_DEVTOOLS),
 	},
+	dir: {
+		public: './../public',
+	},
 	eslint: {
 		config: {
 			standalone: false,
