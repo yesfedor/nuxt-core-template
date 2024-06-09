@@ -1,7 +1,5 @@
 <template>
 	<div class="app-root app-root--error">
-		<nuxt-pwa-manifest />
-
 		<nuxt-layout name="default">
 			<pre v-if="error">
         {{ error.message }}

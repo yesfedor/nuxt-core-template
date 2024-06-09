@@ -67,7 +67,7 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		// https://nuxt.com/modules/vite-pwa-nuxt
 		// https://vite-pwa-org.netlify.app/frameworks/nuxt.html#vitepwamanifest-nuxtpwamanifest-in-app-vue
-		'@vite-pwa/nuxt',
+		// '@vite-pwa/nuxt',
 		// https://nuxt.com/modules/vee-validate
 		'@vee-validate/nuxt',
 		// https://nuxt.com/modules/icons
@@ -88,10 +88,10 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	pwa: {
-		manifest: false,
-		strategies: 'generateSW',
-	},
+	// pwa: {
+	// 	manifest: false,
+	// 	strategies: 'generateSW',
+	// },
 	runtimeConfig: {
 		public: {
 			APP_DEBUG: Boolean(process.env.APP_DEBUG),
