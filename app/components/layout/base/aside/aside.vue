@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer v-model="drawer" persistent>
+	<v-navigation-drawer v-model="drawer" width="360" class="elevation-0">
 		<v-list>
 			<v-list-item
 				v-for="[icon, text] in links"
@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 const nuxtApp = useNuxtApp()
 
-const drawer = ref(true)
+const drawer = ref(false)
 
 function toggleHandler() {
 	drawer.value = !drawer.value
