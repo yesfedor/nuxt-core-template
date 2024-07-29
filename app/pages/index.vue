@@ -10,20 +10,21 @@
 
 		<p>Host: {{ baseUrl }}</p>
 
-		<template v-if="firstCat?.id">
+		<template v-if="first?.id">
 			<p>Your unique cat</p>
-			<img :src="firstCat.url" :alt="firstCat.id" class="app-page-home__cat">
+			<img :src="first.url" :alt="first.id" class="app-page-home__cat">
 		</template>
 	</div>
 </template>
 
 <script lang="ts" setup>
+import { useCatCatalog } from '~~/layers/catapi/composables/useCatCatalog'
+
 const config = useRuntimeConfig()
 const baseUrl = ref(config.public.BASE_URL)
 
 // example use auto import api folder
-const cats = await useAsyncData('api:cats', async () => await apiGetImageFromTheCatApi())
-const firstCat = computed(() => cats.data.value ? cats.data.value[0] : null)
+const { first } = await useCatCatalog()
 </script>
 
 <style lang="scss">

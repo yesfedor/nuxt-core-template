@@ -9,6 +9,9 @@ export default defineNuxtConfig({
 	app: {
 		head: headConfig,
 	},
+
+	compatibilityDate: '2024-07-30',
+
 	components: {
 		dirs: [
 			{
@@ -17,26 +20,33 @@ export default defineNuxtConfig({
 			},
 		],
 	},
+
 	css: [
 		'~/assets/stylesheets/main.scss',
 	],
+
 	devServer: {
 		host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
 		port: Number(process.env.NITRO_DEV_PORT) || 3000,
 	},
+
 	devtools: {
 		enabled: Boolean(process.env.APP_DEVTOOLS),
 	},
+
 	dir: {
 		public: './../public',
 	},
+
 	eslint: {
 		config: {
 			standalone: false,
 		},
 		checker: true,
 	},
+
 	experimental: experimentalConfig,
+
 	i18n: {
 		defaultLocale: 'en',
 		detectBrowserLanguage: {
@@ -55,11 +65,13 @@ export default defineNuxtConfig({
 		strategy: 'prefix_except_default',
 		vueI18n: './configs/i18n.config.ts',
 	},
+
 	imports: {
 		dirs: [
 			'./api',
 		],
 	},
+
 	modules: [
 		// https://eslint.nuxt.com/packages/module
 		'@nuxt/eslint',
@@ -67,7 +79,7 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		// https://nuxt.com/modules/vite-pwa-nuxt
 		// https://vite-pwa-org.netlify.app/frameworks/nuxt.html#vitepwamanifest-nuxtpwamanifest-in-app-vue
-		'@vite-pwa/nuxt',
+		// '@vite-pwa/nuxt',
 		// https://nuxt.com/modules/vee-validate
 		'@vee-validate/nuxt',
 		// https://nuxt.com/modules/icons
@@ -77,9 +89,15 @@ export default defineNuxtConfig({
 		// https://nuxt.com/modules/device
 		'@nuxtjs/device',
 	],
+
 	pinia: {
 		storesDirs: ['./app/stores/**'],
 	},
+
+	// pwa: {
+	// 	manifest: false,
+	// 	strategies: 'generateSW',
+	// },
 	postcss: {
 		plugins: {
 			cssnano: { preset: 'default' },
@@ -88,10 +106,7 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	pwa: {
-		manifest: false,
-		strategies: 'generateSW',
-	},
+
 	runtimeConfig: {
 		public: {
 			APP_DEBUG: Boolean(process.env.APP_DEBUG),
@@ -101,6 +116,7 @@ export default defineNuxtConfig({
 			NUXT_SSR: Boolean(process.env.NUXT_SSR),
 		},
 	},
+
 	srcDir: './app',
 	ssr: Boolean(process.env.NUXT_SSR),
 	vite: viteConfig,

@@ -1,6 +1,6 @@
 <template>
 	<div class="app-root">
-		<nuxt-pwa-manifest />
+		<nuxt-route-announcer />
 
 		<nuxt-layout fallback="default">
 			<nuxt-page />
