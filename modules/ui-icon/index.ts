@@ -21,7 +21,7 @@ export default defineNuxtModule({
 		}
 
 		const resolver = createResolver(import.meta.url)
-		const iconsDir = resolver.resolve('../../assets/icons')
+		const iconsDir = resolver.resolve('../../app/assets/icons')
 		const filenames = readAllFiles(iconsDir)
 
 		const iconKeys = Array.from(filenames)
@@ -31,7 +31,7 @@ export default defineNuxtModule({
 					.replace(/\\/g, '/')
 					.replace('.svg', '')
 
-				const sourceToIcon = 'assets/icons'
+				const sourceToIcon = 'app/assets/icons'
 				const match = path.match(sourceToIcon)
 				if (match?.index) {
 					return path.slice(match.index + sourceToIcon.length + 1)

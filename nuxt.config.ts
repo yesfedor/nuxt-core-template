@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 		head: headConfig,
 	},
 
-	compatibilityDate: '2024-07-30',
+	compatibilityDate: '2024-09-09',
 
 	components: {
 		dirs: [
@@ -41,11 +41,16 @@ export default defineNuxtConfig({
 	eslint: {
 		config: {
 			standalone: false,
+			stylistic: true,
 		},
 		checker: true,
 	},
 
 	experimental: experimentalConfig,
+
+	future: {
+		compatibilityVersion: 4
+	},
 
 	i18n: {
 		defaultLocale: 'en',
@@ -92,19 +97,6 @@ export default defineNuxtConfig({
 
 	pinia: {
 		storesDirs: ['./app/stores/**'],
-	},
-
-	// pwa: {
-	// 	manifest: false,
-	// 	strategies: 'generateSW',
-	// },
-	postcss: {
-		plugins: {
-			cssnano: { preset: 'default' },
-			autoprefixer: {
-				cascade: false,
-			},
-		},
 	},
 
 	runtimeConfig: {

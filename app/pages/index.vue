@@ -6,7 +6,7 @@
 
 		<ui-icon name="reorder" filled />
 
-		<p>This is production: Nuxt Core Template v3.11.2</p>
+		<p>This is production: Nuxt Core Template v3.13.1</p>
 
 		<p>Host: {{ baseUrl }}</p>
 
