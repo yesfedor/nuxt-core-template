@@ -10,7 +10,7 @@ services:
         - BRANCH_NAME=${BRANCH_NAME}
       dockerfile: Dockerfile
     ports:
-      - "${PORT}:3000"
+      - '${PORT}:3000'
     environment:
       - ENVIRONMENT_NAME=${ENVIRONMENT_NAME}
       - CHOKIDAR_USEPOLLING=true
