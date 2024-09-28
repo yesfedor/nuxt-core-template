@@ -73,18 +73,21 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: [
-      './api',
+      // TODO: Check how work
+      './app/api',
     ],
   },
 
   modules: [
     // https://eslint.nuxt.com/packages/module
     '@nuxt/eslint',
+    // https://nuxt.com/modules/stylelint
+    '@nuxtjs/stylelint-module',
     // https://nuxt.com/modules/pinia
     '@pinia/nuxt',
     // https://nuxt.com/modules/vite-pwa-nuxt
     // https://vite-pwa-org.netlify.app/frameworks/nuxt.html#vitepwamanifest-nuxtpwamanifest-in-app-vue
-    // '@vite-pwa/nuxt',
+    '@vite-pwa/nuxt',
     // https://nuxt.com/modules/vee-validate
     '@vee-validate/nuxt',
     // https://nuxt.com/modules/icons
@@ -99,6 +102,31 @@ export default defineNuxtConfig({
     storesDirs: ['./app/stores/**'],
   },
 
+  pwa: {
+    mode: 'development',
+    base: '/',
+    includeAssets: ['favicon.ico'],
+    manifest: {
+      name: 'Nuxt Core Template',
+      scope: '/',
+      short_name: 'My App',
+      theme_color: '#ffffff',
+      background_color: '#000000',
+      icons: [
+        {
+          src: '/favicon/favicon-32x32.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: '/favicon/favicon-16x16.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+      ],
+    },
+  },
+
   runtimeConfig: {
     public: {
       APP_DEBUG: Boolean(process.env.APP_DEBUG),
@@ -110,6 +138,8 @@ export default defineNuxtConfig({
   },
 
   srcDir: './app',
+
   ssr: Boolean(process.env.NUXT_SSR),
+  stylelint: {},
   vite: viteConfig,
 })
