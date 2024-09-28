@@ -73,8 +73,7 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: [
-      // TODO: Check how work
-      './app/api',
+      './api',
     ],
   },
 
@@ -104,26 +103,13 @@ export default defineNuxtConfig({
 
   pwa: {
     mode: 'development',
-    base: '/',
-    includeAssets: ['favicon.ico'],
+    includeAssets: [],
     manifest: {
       name: 'Nuxt Core Template',
-      scope: '/',
       short_name: 'My App',
       theme_color: '#ffffff',
       background_color: '#000000',
-      icons: [
-        {
-          src: '/favicon/favicon-32x32.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: '/favicon/favicon-16x16.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-      ],
+      icons: [],
     },
   },
 
