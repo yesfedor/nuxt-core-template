@@ -1,5 +1,14 @@
 <script lang="ts" setup>
+interface Props {
+  /** The name of the user */
+  name?: string
+}
 
+const props = defineProps<Props>()
+
+provide(props.name, {
+  scope: {},
+})
 </script>
 
 <template>

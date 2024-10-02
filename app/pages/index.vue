@@ -6,8 +6,6 @@ const nuxtVersion = ref(nuxtApp.versions.nuxt)
 
 // example use auto import api folder
 const { first } = await useCatCatalog()
-
-const localePath = useLocalePath()
 </script>
 
 <template>
@@ -33,11 +31,6 @@ const localePath = useLocalePath()
         class="app-page-home__cat"
       >
     </template>
-
-    <p class="app-page-home__me-1">
-      <span>Second page (test navigate):</span>
-      <nuxt-link :to="localePath({ name: 'about' })">/about</nuxt-link>
-    </p>
   </div>
 </template>
 
@@ -46,6 +39,7 @@ const localePath = useLocalePath()
   display: flex;
   align-items: center;
   flex-direction: column;
+  font-family: Roboto, system-ui;
 
   &__title {
     color: #00dc82;
@@ -55,10 +49,6 @@ const localePath = useLocalePath()
     max-width: 50vw;
     max-height: 50vh;
     object-fit: cover;
-  }
-
-  &__me-1 {
-    margin-right: 1rem;
   }
 }
 </style>

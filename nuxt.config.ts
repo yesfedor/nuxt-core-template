@@ -2,6 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 import experimentalConfig from './configs/experimental.config'
 import headConfig from './configs/head.config'
+import pwaConfig from './configs/pwa.config'
 import viteConfig from './configs/vite.config'
 
 export default defineNuxtConfig({
@@ -95,39 +96,21 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     // https://nuxt.com/modules/device
     '@nuxtjs/device',
+    // https://storybook.nuxtjs.org/getting-started/setup
+    '@nuxtjs/storybook',
   ],
+
+  nitro: {
+    prerender: {
+      routes: ['/offline'],
+    },
+  },
 
   pinia: {
     storesDirs: ['./app/stores/**'],
   },
 
-  pwa: {
-    mode: 'development',
-    strategies: 'generateSW',
-    manifest: {
-      name: 'Nuxt Core Template v3.12.3',
-      display: 'standalone',
-      short_name: 'My App',
-      theme_color: '#ffffff',
-      background_color: '#000000',
-      icons: [
-        {
-          src: '/favicon/android-chrome-192x192.png?v=1',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: '/favicon/android-chrome-512x512.png?v=1',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-      ],
-      lang: 'en',
-    },
-    workbox: {
-      navigateFallback: undefined,
-    },
-  },
+  pwa: pwaConfig,
 
   runtimeConfig: {
     public: {
@@ -142,6 +125,10 @@ export default defineNuxtConfig({
   srcDir: './app',
 
   ssr: Boolean(process.env.NUXT_SSR),
+  storybook: {
+    route: '/_storybook',
+    port: Number(process.env.STORYBOOK_PORT || 8081),
+  },
   stylelint: {},
   vite: viteConfig,
 })

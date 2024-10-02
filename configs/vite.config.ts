@@ -8,6 +8,9 @@ export default <Partial<NuxtOptions['vite']>> {
       },
     },
   },
+  optimizeDeps: {
+    include: ['jsdoc-type-pratt-parser'],
+  },
   server: {
     watch: {
       usePolling: true,
