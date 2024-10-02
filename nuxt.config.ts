@@ -105,11 +105,23 @@ export default defineNuxtConfig({
     mode: 'development',
     strategies: 'generateSW',
     manifest: {
-      name: 'Nuxt Core Template',
+      name: 'Nuxt Core Template v3.12.3',
+      display: 'standalone',
       short_name: 'My App',
       theme_color: '#ffffff',
       background_color: '#000000',
-      icons: [],
+      icons: [
+        {
+          src: '/favicon/android-chrome-192x192.png?v=1',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: '/favicon/android-chrome-512x512.png?v=1',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+      ],
       lang: 'en',
     },
     workbox: {
