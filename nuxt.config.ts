@@ -80,11 +80,13 @@ export default defineNuxtConfig({
   modules: [
     // https://eslint.nuxt.com/packages/module
     '@nuxt/eslint',
+    // https://nuxt.com/modules/stylelint
+    '@nuxtjs/stylelint-module',
     // https://nuxt.com/modules/pinia
     '@pinia/nuxt',
     // https://nuxt.com/modules/vite-pwa-nuxt
     // https://vite-pwa-org.netlify.app/frameworks/nuxt.html#vitepwamanifest-nuxtpwamanifest-in-app-vue
-    // '@vite-pwa/nuxt',
+    '@vite-pwa/nuxt',
     // https://nuxt.com/modules/vee-validate
     '@vee-validate/nuxt',
     // https://nuxt.com/modules/icons
@@ -99,6 +101,39 @@ export default defineNuxtConfig({
     storesDirs: ['./app/stores/**'],
   },
 
+  pwa: {
+    includeAssets: [],
+    manifest: {
+      name: 'Nuxt Core Template',
+      short_name: 'My App',
+      theme_color: '#ffffff',
+      background_color: '#000000',
+      icons: [],
+      lang: 'en',
+    },
+    mode: 'development',
+    workbox: {
+      globPatterns: ['**\/*.{js,wasm,css}'],
+      navigateFallback: '/offline',
+      templatedURLs: {
+        '/': ['/'],
+        '/offline': ['/offline'],
+      },
+      runtimeCaching: [
+        {
+          handler: 'NetworkFirst',
+          urlPattern: /\.(?:html)$/,
+          options: {
+            cacheName: 'html-cache',
+            expiration: {
+              maxAgeSeconds: 24 * 60 * 60,
+            },
+          },
+        },
+      ],
+    },
+  },
+
   runtimeConfig: {
     public: {
       APP_DEBUG: Boolean(process.env.APP_DEBUG),
@@ -110,6 +145,8 @@ export default defineNuxtConfig({
   },
 
   srcDir: './app',
+
   ssr: Boolean(process.env.NUXT_SSR),
+  stylelint: {},
   vite: viteConfig,
 })

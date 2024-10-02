@@ -1,9 +1,6 @@
 import type { NuxtOptions } from '@nuxt/schema'
 
 export default <Partial<NuxtOptions['vite']>> {
-  build: {
-    assetsDir: 'static/',
-  },
   css: {
     preprocessorOptions: {
       scss: {
