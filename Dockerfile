@@ -31,8 +31,6 @@ RUN npm run build
 
 COPY . .
 
-RUN /bin/sh -c "docker builder prune"
-
 EXPOSE 3000
 
 CMD ["node", ".output/server/index.mjs"]
