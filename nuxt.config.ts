@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   },
 
   dir: {
-    public: './../public',
+    public: './public',
   },
 
   eslint: {
@@ -102,7 +102,8 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    includeAssets: [],
+    mode: 'development',
+    strategies: 'generateSW',
     manifest: {
       name: 'Nuxt Core Template',
       short_name: 'My App',
@@ -111,26 +112,8 @@ export default defineNuxtConfig({
       icons: [],
       lang: 'en',
     },
-    mode: 'development',
     workbox: {
-      globPatterns: ['**\/*.{js,wasm,css}'],
-      navigateFallback: '/offline',
-      templatedURLs: {
-        '/': ['/'],
-        '/offline': ['/offline'],
-      },
-      runtimeCaching: [
-        {
-          handler: 'NetworkFirst',
-          urlPattern: /\.(?:html)$/,
-          options: {
-            cacheName: 'html-cache',
-            expiration: {
-              maxAgeSeconds: 24 * 60 * 60,
-            },
-          },
-        },
-      ],
+      navigateFallback: undefined,
     },
   },
 

@@ -4,6 +4,9 @@ const error = useError()
 
 <template>
   <div class="app-root app-root--error">
+    <nuxt-route-announcer />
+    <vite-pwa-manifest />
+
     <nuxt-layout name="default">
       <pre v-if="error">
         {{ error.message }}

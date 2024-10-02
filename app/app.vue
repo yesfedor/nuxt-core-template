@@ -5,6 +5,7 @@
 <template>
   <div class="app-root">
     <nuxt-route-announcer />
+    <vite-pwa-manifest />
 
     <nuxt-layout fallback="default">
       <nuxt-page />
