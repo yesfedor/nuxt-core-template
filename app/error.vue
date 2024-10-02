@@ -8,8 +8,11 @@ const error = useError()
     <vite-pwa-manifest />
 
     <nuxt-layout name="default">
-      <pre v-if="error">
-        {{ error.message }}
+      <pre
+        v-if="error"
+        style="white-space: pre-line;"
+      >
+        [VueRouterError]: {{ error.message }}
       </pre>
     </nuxt-layout>
 
