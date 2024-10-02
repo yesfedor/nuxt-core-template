@@ -102,7 +102,6 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    mode: 'development',
     includeAssets: [],
     manifest: {
       name: 'Nuxt Core Template',
@@ -110,6 +109,28 @@ export default defineNuxtConfig({
       theme_color: '#ffffff',
       background_color: '#000000',
       icons: [],
+      lang: 'en',
+    },
+    mode: 'development',
+    workbox: {
+      globPatterns: ['**\/*.{js,wasm,css}'],
+      navigateFallback: '/offline',
+      templatedURLs: {
+        '/': ['index.html'],
+        '/offline': ['offline.html'],
+      },
+      runtimeCaching: [
+        {
+          handler: 'NetworkFirst',
+          urlPattern: /\.(?:html)$/,
+          options: {
+            cacheName: 'html-cache',
+            expiration: {
+              maxAgeSeconds: 24 * 60 * 60,
+            },
+          },
+        },
+      ],
     },
   },
 
