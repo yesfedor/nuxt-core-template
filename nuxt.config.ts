@@ -116,8 +116,8 @@ export default defineNuxtConfig({
       globPatterns: ['**\/*.{js,wasm,css}'],
       navigateFallback: '/offline',
       templatedURLs: {
-        '/': ['index.html'],
-        '/offline': ['offline.html'],
+        '/': ['/'],
+        '/offline': ['/offline'],
       },
       runtimeCaching: [
         {
