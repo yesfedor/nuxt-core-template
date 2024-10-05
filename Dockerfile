@@ -13,7 +13,7 @@ RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.c
 
 COPY . .
 
-FROM node:21.7.2-alpine
+FROM node:22.6.0-alpine
 
 ARG ENVIRONMENT_NAME
 
@@ -30,8 +30,6 @@ RUN npm ci
 RUN npm run build
 
 COPY . .
-
-RUN /bin/sh -c "ls -a"
 
 EXPOSE 3000
 

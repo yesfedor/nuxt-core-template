@@ -4,7 +4,7 @@
 
 <template>
   <layout-provider>
-    <div class="app-layout app-layout--clear">
+    <div class="app-layout app-layout--offline">
       <div class="app-layout__content">
         <slot />
       </div>

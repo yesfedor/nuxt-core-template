@@ -1,5 +1,9 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
-	<layout-provider>
+  <layout-provider>
 		<v-app>
 			<layout-base-system-bar />
 
@@ -13,9 +17,5 @@
 				<slot />
 			</v-main>
 		</v-app>
-	</layout-provider>
+  </layout-provider>
 </template>
-
-<script setup lang="ts">
-
-</script>

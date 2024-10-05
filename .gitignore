@@ -20,5 +20,5 @@ logs
 
 # Local env files
 .env
-!/.stylelintcache
 /.eslintcache
+/.stylelintcache
