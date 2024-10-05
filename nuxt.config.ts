@@ -74,7 +74,10 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: [
-      './api',
+      './api/**',
+      './composables/**',
+      './utils/**',
+      '../shared/**',
     ],
   },
 
