@@ -48,7 +48,7 @@ export default <Partial<NuxtOptions['pwa']>> {
     },
     runtimeCaching: [
       {
-        urlPattern: /^\/(?!_nuxt|api|proxy)[^\/]+(?:\/[^\/]+)*$/,
+        urlPattern: /^\/(?!_nuxt|api|proxy)[^/]+(?:\/[^/]+)*$/,
         handler: 'NetworkFirst',
         options: {
           cacheName: 'app-pages',

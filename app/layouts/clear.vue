@@ -4,10 +4,10 @@
 
 <template>
   <layout-provider>
-    <div class="app-layout app-layout--clear">
-      <div class="app-layout__content">
+    <v-app>
+      <v-main>
         <slot />
-      </div>
-    </div>
+      </v-main>
+    </v-app>
   </layout-provider>
 </template>
