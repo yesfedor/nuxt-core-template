@@ -4,7 +4,7 @@ const nuxtApp = useNuxtApp()
 const baseUrl = ref(nuxtApp.$config.public.BASE_URL)
 const nuxtVersion = ref(nuxtApp.versions.nuxt)
 
-// example use auto import api folder
+// example use layers
 const { first } = await useCatCatalog()
 </script>
 
