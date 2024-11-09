@@ -1,5 +1,5 @@
 /* abstracts only */
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/helpers';
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/helpers' as *;

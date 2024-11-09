@@ -1,17 +1,17 @@
 /* 1. abstracts */
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/helpers';
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/helpers' as *;
 
 /* 2. vendors */
-@import 'vendors/base';
+@use 'vendors/base' as *;
 
 /* 3. base */
-@import 'base/animations';
-@import 'base/base';
-@import 'base/reset';
-@import 'base/typography';
+@use 'base/animations' as *;
+@use 'base/base' as *;
+@use 'base/reset' as *;
+@use 'base/typography' as *;
 
 /* 4. partials - layout */
 
@@ -22,4 +22,4 @@
 /* 7. themes */
 
 /* 8. shame */
-@import 'shame';
+@use 'shame' as *;
