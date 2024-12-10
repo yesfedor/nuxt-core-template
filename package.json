@@ -56,5 +56,9 @@
     "vite-plugin-eslint2": "^5.0.2",
     "vue": "latest",
     "vue-router": "^4.4.5"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.22.5",
+    "@rollup/rollup-win32-x64-msvc": "4.22.5"
   }
 }
