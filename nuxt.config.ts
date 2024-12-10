@@ -90,11 +90,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-09-09',
 
-  nitro: {
-    prerender: {
-      routes: ['/offline'],
-    },
-  },
   vite: viteConfig,
 
   eslint: {
