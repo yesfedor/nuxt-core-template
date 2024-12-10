@@ -2,7 +2,8 @@ import type { NuxtOptions } from '@nuxt/schema'
 
 export default <Partial<NuxtOptions['pwa']>> {
   mode: 'development',
-  strategies: 'generateSW',
+  selfDestroying: true,
+  strategies: 'injectManifest',
   client: {
     periodicSyncForUpdates: 60,
   },
@@ -37,38 +38,5 @@ export default <Partial<NuxtOptions['pwa']>> {
       },
     ],
     lang: 'en',
-  },
-  workbox: {
-    globPatterns: ['**\\/*.{js,wasm,css,html,webmanifest}'],
-    navigateFallback: '/offline.html',
-    navigationPreload: true,
-    skipWaiting: true,
-    templatedURLs: {
-      '/': '/offline.html',
-    },
-    runtimeCaching: [
-      {
-        urlPattern: /^\/(?!_nuxt|api|proxy)[^\/]+(?:\/[^\/]+)*$/,
-        handler: 'NetworkFirst',
-        options: {
-          cacheName: 'app-pages',
-          expiration: {
-            maxEntries: 250,
-            maxAgeSeconds: 14 * 24 * 60 * 60,
-          },
-        },
-      },
-      {
-        urlPattern: /\.(?:js|css)$/,
-        handler: 'StaleWhileRevalidate',
-        options: {
-          cacheName: 'assets-cache',
-          expiration: {
-            maxEntries: 250,
-            maxAgeSeconds: 14 * 24 * 60 * 60,
-          },
-        },
-      },
-    ],
   },
 }
