@@ -51,7 +51,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: Boolean(process.env.APP_DEVTOOLS),
+    enabled: Boolean(process.env.NUXT_DEVTOOLS),
   },
   app: {
     head: headConfig,
