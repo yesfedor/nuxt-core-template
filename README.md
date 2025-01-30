@@ -16,7 +16,7 @@ Thus, the following plugins are now configured and supported:
 5. Consola - To wrap the logs
 6. Mitt - Global emitter
 7. VueUse - for support function
-8. Lodash-es - for data manipulation
+8. Es Toolkit (replacement lodash) - for data manipulation
 9. VeeValidate with yup - data validation and scheme organizer
 10. and more Vue / Nuxt modules - Vue Router, Pinia, I18n, etc..
 
