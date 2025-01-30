@@ -54,6 +54,7 @@
     "stylelint-config-standard-vue": "^1.0.0",
     "stylelint-scss": "^6.10.1",
     "vite-plugin-eslint2": "^5.0.2",
+    "yup": "^1.6.1",
     "vue": "latest",
     "vue-router": "^4.4.5"
   },
