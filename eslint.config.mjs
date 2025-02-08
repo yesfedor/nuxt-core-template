@@ -9,6 +9,9 @@ export default withNuxt(
     ],
     vue: true,
     typescript: true,
+    gitignore: false,
+    yaml: false,
+    toml: false,
     parserOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -22,6 +25,22 @@ export default withNuxt(
       indent: 2,
       quotes: 'single',
     },
+    formatters: {
+      css: true,
+      html: true,
+      markdown: true,
+    },
+    ignores: [
+      '.nuxt',
+      '/.nuxt/',
+      '.output',
+      '/.output/',
+      'dist',
+      '/dist/',
+      'node_modules',
+      '/node_modules/',
+      '/public/',
+    ],
     rules: {
       // code quality
       '@typescript-eslint/no-unused-vars': 'error',
@@ -81,12 +100,31 @@ export default withNuxt(
         multiline: 'always',
       }],
       'vue/max-attributes-per-line': ['error', {
-        singleline: {
-          max: 1,
-        },
-        multiline: {
-          max: 1,
-        },
+        singleline: 5,
+        multiline: 1,
+      }],
+      'vue/first-attribute-linebreak': ['error', {
+        singleline: 'beside',
+        multiline: 'below',
+      }],
+      'vue/attributes-order': ['error', {
+        order: [
+          'DEFINITION',
+          'LIST_RENDERING',
+          'CONDITIONALS',
+          'RENDER_MODIFIERS',
+          'UNIQUE',
+          'GLOBAL',
+          'SLOT',
+          'TWO_WAY_BINDING',
+          'ATTR_DYNAMIC',
+          'ATTR_STATIC',
+          'ATTR_SHORTHAND_BOOL',
+          'CONTENT',
+          'OTHER_DIRECTIVES',
+          'EVENTS',
+        ],
+        alphabetical: false,
       }],
       'vue/multiline-html-element-content-newline': 'off',
       'vue/html-indent': ['error', 2],
@@ -100,6 +138,16 @@ export default withNuxt(
       // style
       'style/member-delimiter-style': 'off',
       'style/semi': ['error', 'never'],
+      'style/comma-dangle': ['error', {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'ignore',
+      }],
+      'style/quotes': ['error', 'single', { avoidEscape: true }],
+      'style/indent': ['error', 2, { SwitchCase: 1 }],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
 
       // node
       'node/prefer-global/process': 'off',
@@ -109,7 +157,7 @@ export default withNuxt(
       'dot-notation': 'error',
       'block-no-empty': 'off',
       'vue/html-self-closing': 'off',
-      '@stylistic/brace-style': 'off',
+      'vue/brace-style': 'error',
     },
     overrides: [],
   }),
