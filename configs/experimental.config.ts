@@ -7,4 +7,5 @@ export default <Partial<NuxtOptions['experimental']>>{
   inlineSSRStyles: false,
   payloadExtraction: true,
   sharedPrerenderData: true,
+  typedPages: true,
 }
