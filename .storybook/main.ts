@@ -1,6 +1,29 @@
 import type { StorybookConfig } from '@storybook-vue/nuxt'
+import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
+  addons: [
+    // '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@chromatic-com/storybook',
+  ],
+
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+
+  features: {
+    experimentalRSC: true,
+  },
+
+  framework: {
+    name: '@storybook-vue/nuxt',
+    options: {},
+  },
+
+  staticDirs: ['../public', '../app/assets'],
+
   stories: [
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
@@ -13,19 +36,13 @@ const config: StorybookConfig = {
     '../shared/**/*.mdx',
     '../shared/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
-  framework: {
-    name: '@storybook-vue/nuxt',
-    options: {
-      docgen: 'vue-component-meta',
-    },
-  },
-  docs: {
-    autodocs: 'tag',
+
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: {},
+      },
+    })
   },
 }
 

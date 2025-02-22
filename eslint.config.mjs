@@ -6,9 +6,13 @@ export default withNuxt(
     type: 'app',
     extends: [
       '@antfu/eslint-config/rules',
+      'eslint:recommended',
     ],
     vue: true,
     typescript: true,
+    gitignore: false,
+    yaml: false,
+    toml: false,
     parserOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -22,8 +26,15 @@ export default withNuxt(
       indent: 2,
       quotes: 'single',
     },
+    formatters: {
+      css: true,
+      html: true,
+      markdown: true,
+    },
     rules: {
       // code quality
+      'no-extra-boolean-cast': 'off',
+      'quotes': ['error', 'single'],
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/ban-ts-comment': 'off',
@@ -81,36 +92,89 @@ export default withNuxt(
         multiline: 'always',
       }],
       'vue/max-attributes-per-line': ['error', {
-        singleline: {
-          max: 1,
-        },
-        multiline: {
-          max: 1,
-        },
+        singleline: 5,
+        multiline: 1,
+      }],
+      'vue/first-attribute-linebreak': ['error', {
+        singleline: 'beside',
+        multiline: 'below',
+      }],
+      'vue/attributes-order': ['error', {
+        order: [
+          'DEFINITION',
+          'LIST_RENDERING',
+          'CONDITIONALS',
+          'RENDER_MODIFIERS',
+          'UNIQUE',
+          'GLOBAL',
+          'SLOT',
+          'TWO_WAY_BINDING',
+          'ATTR_DYNAMIC',
+          'ATTR_STATIC',
+          'ATTR_SHORTHAND_BOOL',
+          'CONTENT',
+          'OTHER_DIRECTIVES',
+          'EVENTS',
+        ],
+        alphabetical: false,
       }],
       'vue/multiline-html-element-content-newline': 'off',
       'vue/html-indent': ['error', 2],
-      'vue/script-indent': ['error', 2],
+      'vue/script-indent': 'off',
       'vue/v-on-function-call': 'error',
       'vue/valid-v-slot': 'error',
       'vue/no-unsupported-features': ['error', {
         version: '3.x',
       }],
+      'vue/component-name-in-template-casing': ['error', 'kebab-case', { registeredComponentsOnly: true }],
 
       // style
       'style/member-delimiter-style': 'off',
       'style/semi': ['error', 'never'],
+      'style/comma-dangle': ['error', {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'ignore',
+      }],
+      'style/quotes': ['error', 'single', { avoidEscape: true }],
+      'style/indent': ['error', 2, { SwitchCase: 1 }],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      'style/arrow-parens': [1, 'always'],
+      'style/yield-star-spacing': 'off',
+
+      'unicorn/prefer-node-protocol': 'off',
+      'style/brace-style': ['warn', '1tbs'],
+      'ts/consistent-type-definitions': 'off',
+      '@stylistic/brace-style': 'off',
 
       // node
       'node/prefer-global/process': 'off',
 
       // project
+      'operator-linebreak': 'off',
       'curly': ['warn', 'all'],
       'dot-notation': 'error',
       'block-no-empty': 'off',
       'vue/html-self-closing': 'off',
-      '@stylistic/brace-style': 'off',
+      'vue/brace-style': 'error',
+      'regexp/prefer-w': 'off',
+      'regexp/prefer-d': 'off',
+      'regexp/no-dupe-characters-character-class': 'off',
+      'regexp/sort-flags': 'off',
+      'regexp/no-useless-escape': 'off',
+      'regexp/no-misleading-capturing-group': 'off',
+      'regexp/no-useless-flag': 'off',
     },
-    overrides: [],
+  }).prepend({
+    ignores: [
+      '.nuxt/**/*',
+      '.output/**/*',
+      'dist/**/*',
+      'node_modules/**/*',
+      'public/**/*',
+    ],
   }),
+  // ...your other rules
 )
