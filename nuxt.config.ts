@@ -8,80 +8,6 @@ import viteConfig from './configs/vite.config'
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
 
-  app: {
-    head: headConfig,
-  },
-
-  compatibilityDate: '2024-09-09',
-
-  components: {
-    dirs: [
-      {
-        path: '~/components',
-        pathPrefix: true,
-      },
-    ],
-  },
-
-  css: [
-    '~/assets/stylesheets/main.scss',
-  ],
-
-  devServer: {
-    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
-    port: Number(process.env.NITRO_DEV_PORT) || 3000,
-  },
-
-  devtools: {
-    enabled: Boolean(process.env.NUXT_DEVTOOLS),
-  },
-
-  dir: {
-    public: './public',
-  },
-
-  eslint: {
-    config: {
-      standalone: false,
-      stylistic: true,
-    },
-    checker: true,
-  },
-
-  experimental: experimentalConfig,
-
-  future: {
-    compatibilityVersion: 4,
-  },
-
-  i18n: {
-    defaultLocale: 'en',
-    detectBrowserLanguage: {
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      useCookie: true,
-    },
-    langDir: 'locales',
-    lazy: true,
-    locales: [
-      {
-        code: 'en',
-        file: 'en.ts',
-      },
-    ],
-    strategy: 'prefix_except_default',
-    vueI18n: './configs/i18n.config.ts',
-  },
-
-  imports: {
-    dirs: [
-      './api/**',
-      './composables/**',
-      './utils/**',
-      '../shared/**',
-    ],
-  },
-
   modules: [
     // https://eslint.nuxt.com/packages/module
     '@nuxt/eslint',
@@ -104,11 +30,36 @@ export default defineNuxtConfig({
     '@nuxtjs/storybook',
   ],
 
-  pinia: {
-    storesDirs: ['./app/stores/**'],
+  ssr: Boolean(process.env.NUXT_SSR),
+
+  components: {
+    dirs: [
+      {
+        path: '~/components',
+        pathPrefix: true,
+      },
+    ],
   },
 
-  pwa: pwaConfig,
+  imports: {
+    dirs: [
+      './api/**',
+      './composables/**',
+      './utils/**',
+      '../shared/**',
+    ],
+  },
+
+  devtools: {
+    enabled: Boolean(process.env.NUXT_DEVTOOLS),
+  },
+  app: {
+    head: headConfig,
+  },
+
+  css: [
+    '~/assets/stylesheets/main.scss',
+  ],
 
   runtimeConfig: {
     public: {
@@ -120,14 +71,64 @@ export default defineNuxtConfig({
     },
   },
 
+  dir: {
+    public: './public',
+  },
+
+  srcDir: './app',
+
   sourcemap: {
     client: Boolean(process.env.APP_DEBUG),
     server: Boolean(process.env.APP_DEBUG || process.env.NUXT_SSR ? 1 : process.env.APP_DEBUG),
   },
 
-  srcDir: './app',
+  devServer: {
+    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
+    port: Number(process.env.NITRO_DEV_PORT) || 3000,
+  },
 
-  ssr: Boolean(process.env.NUXT_SSR),
+  future: {
+    compatibilityVersion: 4,
+  },
+
+  experimental: experimentalConfig,
+
+  compatibilityDate: '2024-09-09',
+
+  vite: viteConfig,
+
+  eslint: {
+    config: {
+      standalone: false,
+      stylistic: true,
+    },
+    checker: true,
+  },
+
+  i18n: {
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      useCookie: true,
+    },
+    langDir: 'locales',
+    lazy: true,
+    locales: [
+      {
+        code: 'en',
+        file: 'en.ts',
+      },
+    ],
+    strategy: 'prefix_except_default',
+    vueI18n: './configs/i18n.config.ts',
+  },
+
+  pinia: {
+    storesDirs: ['./app/stores/**'],
+  },
+
+  pwa: pwaConfig,
 
   storybook: {
     route: '/_storybook',
@@ -136,6 +137,4 @@ export default defineNuxtConfig({
   },
 
   stylelint: {},
-
-  vite: viteConfig,
 })

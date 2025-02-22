@@ -1,50 +1,50 @@
 /* mixins */
-@use "sass:map";
+@use 'sass:map';
 
 @mixin media-max($mediaWidth) {
-	@media only screen and (max-width: $mediaWidth) {
-		@content;
-	}
+  @media only screen and (max-width: $mediaWidth) {
+    @content;
+  }
 }
 
 @mixin media-min($mediaWidth) {
-	@media only screen and (min-width: $mediaWidth) {
-		@content;
-	}
+  @media only screen and (min-width: $mediaWidth) {
+    @content;
+  }
 }
 
 @mixin media-distance($mediaWidthMin, $mediaWidthMax) {
-	@media only screen and (min-width: $mediaWidthMin) and (max-width: $mediaWidthMax - 1) {
-		@content;
-	}
+  @media only screen and (min-width: $mediaWidthMin) and (max-width: $mediaWidthMax - 1) {
+    @content;
+  }
 }
 
 @mixin bp-desktop-min {
-	@media only screen and (min-width: map.get($breakpoints, desktop-xs)) {
-		@content;
-	}
+  @media only screen and (min-width: map.get($breakpoints, desktop-xs)) {
+    @content;
+  }
 }
 
 @mixin bp-tablet-max {
-	@media only screen and (max-width: map.get($breakpoints, tablet)) {
-		@content;
-	}
+  @media only screen and (max-width: map.get($breakpoints, tablet)) {
+    @content;
+  }
 }
 
 @mixin bp-tablet-min {
-	@media only screen and (min-width: map.get($breakpoints, tablet-xs)) {
-		@content;
-	}
+  @media only screen and (min-width: map.get($breakpoints, tablet-xs)) {
+    @content;
+  }
 }
 
 @mixin bp-mobile-max {
-	@media only screen and (max-width: map.get($breakpoints, mobile)) {
-		@content;
-	}
+  @media only screen and (max-width: map.get($breakpoints, mobile)) {
+    @content;
+  }
 }
 
 @mixin bp-mobile-min {
-	@media only screen and (max-width: map.get($breakpoints, mobile-xs)) {
-		@content;
-	}
+  @media only screen and (max-width: map.get($breakpoints, mobile-xs)) {
+    @content;
+  }
 }
