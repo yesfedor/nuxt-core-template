@@ -20,8 +20,8 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     // https://nuxt.com/modules/vee-validate
     '@vee-validate/nuxt',
-    // https://nuxt.com/modules/icons
-    'nuxt-icons',
+    // https://github.com/nuxt/icon
+    '@nuxt/icon',
     // https://v8.i18n.nuxtjs.org/options/vue-i18n
     '@nuxtjs/i18n',
     // https://nuxt.com/modules/device
@@ -53,6 +53,7 @@ export default defineNuxtConfig({
   devtools: {
     enabled: Boolean(process.env.NUXT_DEVTOOLS),
   },
+
   app: {
     head: headConfig,
   },
@@ -122,6 +123,16 @@ export default defineNuxtConfig({
     ],
     strategy: 'prefix_except_default',
     vueI18n: './configs/i18n.config.ts',
+  },
+
+  icon: {
+    provider: 'server',
+    customCollections: [
+      {
+        prefix: 'asset',
+        dir: './app/assets/icons',
+      },
+    ],
   },
 
   pinia: {

@@ -6,18 +6,17 @@ const nuxtVersion = ref(nuxtApp.versions.nuxt)
 
 // example use layers
 const { first } = await useCatCatalog()
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="app-page-home">
     <h1 class="app-page-home__title">
-      {{ $t('welcome') }}
+      {{ t('welcome') }}
     </h1>
 
-    <ui-icon
-      name="reorder"
-      filled
-    />
+    <icon name="asset:reorder" size="16" />
 
     <p>This is production: Nuxt Core Template v{{ nuxtVersion }}</p>
 
