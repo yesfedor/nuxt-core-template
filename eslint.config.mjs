@@ -121,7 +121,6 @@ export default withNuxt(
       'vue/multiline-html-element-content-newline': 'off',
       'vue/html-indent': ['error', 2],
       'vue/script-indent': 'off',
-      'vue/v-on-function-call': 'error',
       'vue/valid-v-slot': 'error',
       'vue/no-unsupported-features': ['error', {
         version: '3.x',
