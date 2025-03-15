@@ -122,7 +122,7 @@ export default defineNuxtConfig({
       },
     ],
     strategy: 'prefix_except_default',
-    vueI18n: './configs/i18n.config.ts',
+    vueI18n: '../configs/i18n.config.ts',
   },
 
   icon: {
