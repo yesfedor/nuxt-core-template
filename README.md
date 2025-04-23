@@ -4,6 +4,7 @@ This project is a template, for quickly getting started on your new project.
 When creating the template, many requests from businesses were taken into account, and the convenience of development.
 
 ---
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/yesfedor/nuxt-core-template/deploy.yml)
 
 ### About
 
@@ -29,6 +30,7 @@ Thus, the following plugins are now configured and supported:
 3. Plugin `1.initialization.ts` - initialization you're app here - validate token, request the site configuration, etc.
 4. Plugin `2.eventBus.ts` - wrapper over the `mitt` package for convenient use
 5. A `app/api` api folder support auto-imports a.k.a composable, for details see [homepage](./app/pages/index.vue)
+6. A `shared/ajv` The `ajv` package and `ajv-keywords` (Another JSON Schema Validator) is one of the most popular JSON schema validators for JavaScript. It allows you to check whether the JSON data matches the specified schema. Use this for validate your `contracts`
 
 ---
 

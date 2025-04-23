@@ -1,13 +1,15 @@
 // Doc: https://github.com/developit/mitt
 import mitt from 'mitt'
+import { isString } from 'es-toolkit'
 
 export interface ApplicationEvents {
   /**
    * 'object:event:modification' -> payload type
    * @example 'user:login': User (interface) or type [maybe void]
    */
-  'app:layout:created': void
-  'app:layout:mounted': void
+  'app:layout:created': ReturnType<() => void>
+  'app:layout:mounted': ReturnType<() => void>
+  [key: string | symbol]: ReturnType<() => void>
 }
 
 export default defineNuxtPlugin({
@@ -19,6 +21,9 @@ export default defineNuxtPlugin({
 
     if (!$config.public.APP_IS_PROD && $config.public.APP_DEBUG) {
       emitter.on('*', (type, e: unknown) => {
+        if (!isString(type)) {
+          return logger.info('bus', type.toString(), e)
+        }
         if (e) {
           logger.info('bus', `${type}`, e)
         }

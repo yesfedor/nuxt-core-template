@@ -16,7 +16,10 @@ const { t } = useI18n()
       {{ t('welcome') }}
     </h1>
 
-    <icon name="asset:reorder" size="16" />
+    <icon
+      name="asset:reorder"
+      size="16"
+    />
 
     <p>This is production: Nuxt Core Template v{{ nuxtVersion }}</p>
 
