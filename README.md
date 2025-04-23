@@ -1,69 +1,127 @@
-# Nuxt Core Template
+# Nuxt Core Template 🚀
 
-This project is a template, for quickly getting started on your new project.
-When creating the template, many requests from businesses were taken into account, and the convenience of development.
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/yesfedor/nuxt-core-template/deploy.yml)
+![Nuxt Version](https://img.shields.io/badge/Nuxt-3.16.2-blue?logo=nuxt)
+![Vue Version](https://img.shields.io/badge/Vue-3-lightygreen?logo=vue.js)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
+### **Enterprise-grade Nuxt 3 Starter Template**  
+*Accelerate your Next Web Project with Production-Ready Foundation*
 
-### About
+[![Nuxt 3 Poster](https://nuxt.com/assets/design-kit/logo-green-white.svg)](https://nuxt-core-template.iny.su/)
 
-Thus, the following plugins are now configured and supported:
+## 🌟 Key Features
 
-1. DotEnv files in [environments](./environments) folder supported stage with balanced setting: local, dev, stage, prod
-2. Typescript 5 + Vue 3 + Nuxt 3
-3. Eslint, Stylelint (without lint-staged)
-4. SCSS
-5. Consola - To wrap the logs
-6. Mitt - Global emitter
-7. VueUse - for support function
-8. Es Toolkit (replacement lodash) - for data manipulation
-9. VeeValidate with yup - data validation and scheme organizer
-10. and more Vue / Nuxt modules - Vue Router, Pinia, I18n, etc..
-
----
-
-### Special modifications
-
-1. A `<icon>` module covers the functionality of `nuxt-icon`. There is also a module written for it that scans the `~~/assets/icon` folder and generates a `types` based on the files. Adds hints to the icon name when using the component
-2. A `<core-scope>` is a "god" component, it avoids duplication of initialization code and is a repository of the necessary components throughout the application.
-3. Plugin `1.initialization.ts` - initialization you're app here - validate token, request the site configuration, etc.
-4. Plugin `2.eventBus.ts` - wrapper over the `mitt` package for convenient use
-5. A `app/api` api folder support auto-imports a.k.a composable, for details see [homepage](./app/pages/index.vue)
+### Core Technologies
+| Technology | Description | 
+|------------|-------------|
+| ![Nuxt](https://img.shields.io/badge/-Nuxt_3-00DC82?logo=nuxt.js&logoColor=white) | SSR/SSG/Hybrid Rendering |
+| ![Vue 3](https://img.shields.io/badge/-Vue_3-4FC08D?logo=vue.js&logoColor=white) | Composition API Ecosystem |
+| ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white) | Strict Type Checking |
 
 ---
 
-### Docs
+### Main Modules
 
-1. [Architecture](./docs/architecture.md) - For a quick start, the project philosophy is described, which you can change
-2. [Stylesheets](./app/assets/stylesheets/README.md) - For a quick start, the philosophy of styles is described. SCSS is included
+#### Core Nuxt Modules
+| Module | Purpose | Docs |
+|--------|---------|------|
+| `@nuxt/devtools` | Development Experience Toolkit | [Docs](https://devtools.nuxtjs.org/) |
+| `@nuxt/icon` | Icon Management System | [Docs](https://nuxt.com/modules/icon) |
+| `@nuxtjs/device` | Device Detection | [Docs](https://github.com/nuxt-community/device-module) |
+| `@nuxtjs/stylelint-module` | CSS/SCSS Quality Control | [Docs](https://github.com/nuxt-modules/stylelint) |
+| `@nuxt/eslint` | Code Standardization | [Docs](https://eslint.nuxt.com/) |
 
-### Installation
+#### Development Essentials
+| Module | Purpose | Docs |
+|--------|---------|------|
+| `es-toolkit` | Modern Lodash Alternative | [Docs](https://github.com/evrimagaci/es-toolkit) |
+| `mitt` | Event Bus Implementation | [Docs](https://github.com/developit/mitt) |
+| `@vueuse/nuxt` | Reactive Utilities | [Docs](https://vueuse.org/) |
 
-> You can view the Node.js version in [.nvmrc](./.nvmrc)
+#### Validation & Type Safety
+| Module | Purpose | Docs |
+|--------|---------|------|
+| `ajv` + `ajv-keywords` | JSON Schema Validation | [Docs](https://ajv.js.org/) |
+| `yup` | Form Schema Definition | [Docs](https://github.com/jquense/yup) |
+
+#### Quality Assurance
+| Module | Purpose | Docs |
+|--------|---------|------|
+| `@chromatic-com/storybook` | Visual Testing | [Docs](https://www.chromatic.com/) |
+| `@storybook/*` | Component Isolation | [Docs](https://storybook.js.org/) |
+
+## 🛠 Project Architecture
 
 ```bash
-nvm i && nvm use
+├── app/
+│   ├── assets/stylesheets # SCSS Foundation
+│   ├── components/core # Global Components
+│   ├── pages # Route System
+│   └── api # Auto-imported API Composables
+├── environments/ # Multi-stage Configs
+└── shared/ # Business Logic Helpers
+   ```
+
+## ✨ Special Features
+
+### Custom Innovations
+1. **Dynamic Icon System**  
+   Auto-generated types from `~/assets/icon` with IDE support
+
+2. **Core Scope Component**
+   ```vue
+   <core-scope>
+     <!-- Global context initialization -->
+   </core-scope>
+
+
+3. **Validation Ecosystem**
+   ```ts
+   // Unified validation with YUP + AJV
+   const schema = yup.object({ email: yup.string().required() });
+   ```
+
+## 📦 Installation
+
+```bash
+# Using Node Version Manager
+nvm install && nvm use
+
+# Environment Setup
 cp ./environments/local.env .env
 ```
 
----
-
-### Dev Mode
+## 🚀 Development
 
 ```bash
+# Start Dev Server
 npm run dev
-```
 
----
+# Storybook
+npm run storybook
 
-### Build and start server
-
-```bash
+# Production Build
 npm run build && node .output/server/index.mjs
 ```
 
-### SSG mode and start server
+## 📚 Documentation
 
-```bash
-nuxi generate && npx serve .output/public
-```
+| Section | Description |
+|---------|-------------|
+| [Architecture Guide](docs/architecture.md) | Project Structure Philosophy |
+| [Style Guide](app/assets/stylesheets/README.md) | SCSS Methodology |
+| [Validation System](shared/ajv) | JSON Schema Validation |
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow our [Contribution Guidelines](CONTRIBUTING.md) and read our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+MIT © [Garanin Fedor](https://yesfedor.com)
+
+---
+
+[![Explore on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/yesfedor/nuxt-core-template)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success)](https://nuxt-core-template.iny.su/)
