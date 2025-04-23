@@ -76,11 +76,70 @@
    </core-scope>
 
 
-3. **Validation Ecosystem**
-   ```ts
-   // Unified validation with YUP + AJV
-   const schema = yup.object({ email: yup.string().required() });
-   ```
+## 🔐 Validation Ecosystem
+
+### Unified Data Validation Flow
+
+#### 1. Frontend Validation (YUP + VeeValidate)
+ ```html
+<script setup lang="ts">
+import { useForm } from 'vee-validate'
+import * as yup from 'yup'
+
+// Unified validation schema
+const schema = yup.object({
+  email: yup.string().required().email(),
+  age: yup.number().min(18).max(99),
+  metadata: yup.object({
+    preferences: yup.array().of(yup.string())
+  })
+});
+
+const { handleSubmit } = useForm({
+  validationSchema: schema
+});
+
+const onSubmit = handleSubmit((values) => {
+  // Submit to API
+});
+</script>
+
+<template>
+  <form @submit="onSubmit">
+    <Field name="email" type="email" />
+    <ErrorMessage name="email" />
+    
+    <button type="submit">Submit</button>
+  </form>
+</template>
+ ```
+
+#### 2. Backend Schema Validation (AJV)
+
+```typescript
+// shared/ajv/schemas/user.ts
+import { defineSchema } from 'ajv'
+
+export const userSchema = defineSchema({
+  type: 'object',
+  properties: {
+    email: { type: 'string', format: 'email' },
+    age: { type: 'number', minimum: 18, maximum: 99 },
+    metadata: {
+      type: 'object',
+      properties: {
+        preferences: {
+          type: 'array',
+          items: { type: 'string' }
+        }
+      },
+      required: ['preferences']
+    }
+  },
+  required: ['email', 'age'],
+  additionalProperties: false
+});
+```
 
 ## 📦 Installation
 
