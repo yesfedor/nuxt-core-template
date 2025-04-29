@@ -26,8 +26,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     // https://nuxt.com/modules/device
     '@nuxtjs/device',
-    // https://storybook.nuxtjs.org/getting-started/setup
-    '@nuxtjs/storybook',
+    // Turn on if needed: https://storybook.nuxtjs.org/getting-started/setup
+    // '@nuxtjs/storybook',
   ],
 
   ssr: Boolean(process.env.NUXT_SSR),
@@ -94,7 +94,7 @@ export default defineNuxtConfig({
 
   experimental: experimentalConfig,
 
-  compatibilityDate: '2024-09-09',
+  compatibilityDate: '2025-04-29',
 
   vite: viteConfig,
 
