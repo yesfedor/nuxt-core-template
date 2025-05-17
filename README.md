@@ -1,7 +1,7 @@
 # Nuxt Core Template 🚀
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/yesfedor/nuxt-core-template/deploy.yml)
-![Nuxt Version](https://img.shields.io/badge/Nuxt-3.16.2-blue?logo=nuxt)
+![Nuxt Version](https://img.shields.io/badge/Nuxt-3.17.3-blue?logo=nuxt)
 ![Vue Version](https://img.shields.io/badge/Vue-3-lightygreen?logo=vue.js)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
