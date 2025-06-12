@@ -26,8 +26,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     // https://nuxt.com/modules/device
     '@nuxtjs/device',
-    // Turn on if needed: https://storybook.nuxtjs.org/getting-started/setup
-    // '@nuxtjs/storybook',
   ],
 
   ssr: Boolean(process.env.NUXT_SSR),
@@ -94,7 +92,7 @@ export default defineNuxtConfig({
 
   experimental: experimentalConfig,
 
-  compatibilityDate: '2025-04-29',
+  compatibilityDate: '2025-06-10',
 
   vite: viteConfig,
 
@@ -140,12 +138,6 @@ export default defineNuxtConfig({
   },
 
   pwa: pwaConfig,
-
-  storybook: {
-    route: '/_storybook',
-    port: Number(process.env.STORYBOOK_PORT || 8081),
-    enabled: !process.env.APP_IS_PROD,
-  },
 
   stylelint: {},
 })
