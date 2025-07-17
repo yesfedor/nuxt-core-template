@@ -13,7 +13,7 @@ RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.c
 
 COPY . .
 
-FROM node:24.4.1-alpine
+FROM oven/bun:latest
 
 ARG ENVIRONMENT_NAME
 
@@ -25,12 +25,12 @@ WORKDIR /app
 
 RUN /bin/sh -c "cp ./environments/${ENVIRONMENT_NAME}.env .env"
 
-RUN npm install
+RUN bun install
 
-RUN npm run build
+RUN bun run build
 
 COPY . .
 
 EXPOSE 3000
 
-CMD ["node", ".output/server/index.mjs"]
+CMD ["bun", ".output/server/index.mjs"]
