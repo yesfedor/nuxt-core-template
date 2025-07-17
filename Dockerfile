@@ -13,7 +13,7 @@ RUN /bin/sh -c "git clone --single-branch --branch $BRANCH_NAME https://github.c
 
 COPY . .
 
-FROM node:22.6.0-alpine
+FROM node:24.4.1-alpine
 
 ARG ENVIRONMENT_NAME
 
