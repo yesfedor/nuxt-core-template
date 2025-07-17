@@ -56,5 +56,8 @@
     "vue": "latest",
     "vue-router": "^4.4.5",
     "yup": "^1.6.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-musl": "4.9.5"
   }
 }

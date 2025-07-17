@@ -25,7 +25,7 @@ WORKDIR /app
 
 RUN /bin/sh -c "cp ./environments/${ENVIRONMENT_NAME}.env .env"
 
-RUN npm i
+RUN npm install
 
 RUN npm run build
 
