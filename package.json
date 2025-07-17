@@ -1,7 +1,7 @@
 {
   "name": "nuxt-core-template",
   "type": "module",
-  "version": "3.17.1",
+  "version": "4.0.0",
   "private": true,
   "author": {
     "email": "yesfedor.go@gmail.com",
@@ -44,7 +44,7 @@
     "hookable": "^5.5.3",
     "mitt": "^3.0.1",
     "moment": "^2.30.1",
-    "nuxt": "^3.17.5",
+    "nuxt": "^4.0.0",
     "pinia": "^3.0.3",
     "postcss-html": "^1.8.0",
     "sass": "^1.89.0",

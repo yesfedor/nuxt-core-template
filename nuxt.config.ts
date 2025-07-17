@@ -70,24 +70,18 @@ export default defineNuxtConfig({
     },
   },
 
-  dir: {
-    public: './public',
-  },
-
-  srcDir: './app',
-
   sourcemap: {
     client: Boolean(process.env.APP_DEBUG),
     server: Boolean(process.env.APP_DEBUG || process.env.NUXT_SSR ? 1 : process.env.APP_DEBUG),
   },
 
   devServer: {
-    host: String(process.env.NITRO_DEV_HOST) || '0.0.0.0',
-    port: Number(process.env.NITRO_DEV_PORT) || 3000,
+    host: String(process.env.HOST) || '0.0.0.0',
+    port: Number(process.env.NITRO_PORT) || 3000,
   },
 
-  future: {
-    compatibilityVersion: 4,
+  features: {
+    inlineStyles: false,
   },
 
   experimental: experimentalConfig,
