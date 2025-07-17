@@ -23,7 +23,7 @@ COPY --from=prepare-stage /app /app
 
 WORKDIR /app
 
-RUN npm i @rollup/rollup-linux-x64-musl --save-dev
+RUN npm i @oxc-parser/binding-linux-x64-musl --save-dev
 
 RUN /bin/sh -c "cp ./environments/${ENVIRONMENT_NAME}.env .env"
 
