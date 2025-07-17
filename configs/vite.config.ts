@@ -19,7 +19,7 @@ export default <Partial<NuxtOptions['vite']>> {
     },
     hmr: {
       protocol: 'ws',
-      host: '0.0.0.0',
+      host: String(process.env.HOST) || '0.0.0.0',
     },
   },
 }
