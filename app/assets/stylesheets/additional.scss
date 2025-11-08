@@ -1,5 +1,2 @@
 /* abstracts only */
-@use 'abstracts/variables' as *;
-@use 'abstracts/functions' as *;
-@use 'abstracts/mixins' as *;
-@use 'abstracts/helpers' as *;
+@forward "abstracts/forward";

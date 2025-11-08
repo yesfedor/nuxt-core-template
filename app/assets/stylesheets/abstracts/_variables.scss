@@ -8,3 +8,13 @@ $breakpoints: (
   mobile: 767px,
   mobile-xs: 0,
 );
+$z-indexes: (
+  dialog: 100,
+  backdrop: 99,
+  header: 50,
+  aside: 40,
+  navigation-bottom: 30,
+  dropdown: 20,
+  overlay: 10,
+  below: -1,
+);

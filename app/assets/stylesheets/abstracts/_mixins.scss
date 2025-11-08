@@ -1,5 +1,6 @@
 /* mixins */
 @use 'sass:map';
+@use 'variables' as *;
 
 @mixin media-max($mediaWidth) {
   @media only screen and (max-width: $mediaWidth) {
@@ -19,32 +20,28 @@
   }
 }
 
-@mixin bp-desktop-min {
-  @media only screen and (min-width: map.get($breakpoints, desktop-xs)) {
+@mixin bp-tablet {
+  @media only screen and (min-width: map.get($breakpoints, 'tablet')) {
     @content;
   }
 }
 
-@mixin bp-tablet-max {
-  @media only screen and (max-width: map.get($breakpoints, tablet)) {
+@mixin bp-desktop {
+  @media only screen and (min-width: map.get($breakpoints, 'desktop')) {
     @content;
   }
 }
 
-@mixin bp-tablet-min {
-  @media only screen and (min-width: map.get($breakpoints, tablet-xs)) {
-    @content;
+@mixin use-scrollbar($width) {
+  &::-webkit-scrollbar {
+    width: $width;
   }
-}
 
-@mixin bp-mobile-max {
-  @media only screen and (max-width: map.get($breakpoints, mobile)) {
-    @content;
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
   }
-}
 
-@mixin bp-mobile-min {
-  @media only screen and (max-width: map.get($breakpoints, mobile-xs)) {
-    @content;
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
   }
 }

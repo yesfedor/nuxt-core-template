@@ -1,16 +1,13 @@
 /* 1. abstracts */
-@use 'abstracts/variables' as *;
-@use 'abstracts/functions' as *;
-@use 'abstracts/mixins' as *;
-@use 'abstracts/helpers' as *;
+@use 'abstracts/forward' as *;
 
 /* 2. vendors */
 @use 'vendors/base' as *;
 
 /* 3. base */
 @use 'base/animations' as *;
-@use 'base/base' as *;
 @use 'base/reset' as *;
+@use 'base/base' as *;
 @use 'base/typography' as *;
 
 /* 4. partials - layout */

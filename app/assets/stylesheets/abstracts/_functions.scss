@@ -1,1 +1,16 @@
 /* functions */
+@use 'sass:map';
+@use 'variables' as *;
+
+@function z($key) {
+  @if map.has-key($z-indexes, $key) {
+    @return map.get($z-indexes, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $z-indexes.";
+  @return 0;
+}
+
+@function spacing($value) {
+  @return $spacing-base * $value
+}
