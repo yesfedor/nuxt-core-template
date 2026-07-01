@@ -11,7 +11,10 @@ export default <Partial<NuxtOptions['vite']>> {
     },
   },
   optimizeDeps: {
-    include: ['jsdoc-type-pratt-parser'],
+    include: [
+      'mitt',
+      'es-toolkit',
+    ],
   },
   server: {
     watch: {
