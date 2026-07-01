@@ -1,20 +1,24 @@
-export const useGlobalStore = defineStore('globalStore', {
-  state: () => {
-    return {
-      appConfig: {},
-    }
-  },
-  actions: {
-    async initializationGlobal() {
-      useConsole().info('globalStore', 'init')
-    },
-    async initializationServerOnly() {
-      useConsole().info('globalStore', 'server init')
-    },
-    async initializationClientOnly() {
-      useConsole().info('globalStore', 'client init')
-    },
-  },
+export const useGlobalStore = defineStore('globalStore', () => {
+  const globalConfig = ref({})
+
+  async function initializationGlobal() {
+    useConsole().info('globalStore', 'init')
+  }
+
+  async function initializationServerOnly() {
+    useConsole().info('globalStore', 'server init')
+  }
+
+  async function initializationClientOnly() {
+    useConsole().info('globalStore', 'client init')
+  }
+
+  return {
+    globalConfig,
+    initializationGlobal,
+    initializationServerOnly,
+    initializationClientOnly,
+  }
 })
 
 if (import.meta.hot) {
