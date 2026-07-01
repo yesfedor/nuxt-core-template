@@ -1,0 +1,24 @@
+# Local run — builds the image from the repo (no registry needed).
+#   docker compose -f Docker/docker-compose.local.yml up --build
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: nuxt-core-template:local
+    container_name: nuxt-core-template-local
+    restart: unless-stopped
+    env_file:
+      - ../environments/local.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      NITRO_PORT: 3000
+    ports:
+      - '${HOST_PORT:-3000}:3000'
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:3000/']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

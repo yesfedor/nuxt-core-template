@@ -1,0 +1,33 @@
+# Pulled by CI, run from $DEPLOY_ROOT on vm1.
+#   IMAGE      registry tag to run (required)
+#   HOST_PORT  optional host-port override (default below)
+services:
+  app:
+    image: ${IMAGE:?IMAGE is required}
+    container_name: nuxt-core-template-vm1
+    restart: unless-stopped
+    env_file:
+      - ../environments/vm1.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      NITRO_PORT: 3000
+    ports:
+      - '${HOST_PORT:-3110}:3000'
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:3000/']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true

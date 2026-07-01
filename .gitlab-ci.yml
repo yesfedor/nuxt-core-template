@@ -1,0 +1,181 @@
+stages:
+  - build
+  - deploy
+  - release
+
+variables:
+  DOCKER_HOST: unix:///var/run/docker.sock
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+  DEPLOY_ROOT: /home/projects/nuxt-core-template
+  CONTOUR:
+    value: "dev"
+    options:
+      - "dev"
+      - "test"
+      - "stage"
+      - "prod"
+      - "vm1"
+      - "vm2"
+    description: "Contour to deploy when the pipeline is run manually"
+
+# One environment-agnostic image per pipeline, tagged by commit SHA.
+.build:
+  stage: build
+  image: docker:latest
+  tags:
+    - docker
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build -t "$IMAGE_TAG" .
+    - docker push "$IMAGE_TAG"
+
+# SSH to the contour host, sync Docker/ + environments/ into $DEPLOY_ROOT,
+# then run docker compose there. $SSH_HOST is an environment-scoped variable.
+# Each job sets COMPOSE_HOST -> Docker/docker-compose.<host>.yml.
+.deploy:
+  stage: deploy
+  image: docker:latest
+  tags:
+    - docker
+  needs:
+    - build
+  before_script:
+    - apk add --no-cache openssh-client rsync
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+    - ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+  script:
+    - ssh -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" "mkdir -p '$DEPLOY_ROOT'"
+    - rsync -az --delete -e "ssh -i ~/.ssh/id_ed25519" Docker environments "$SSH_USER@$SSH_HOST:$DEPLOY_ROOT/"
+    - |
+      ssh -i ~/.ssh/id_ed25519 "$SSH_USER@$SSH_HOST" bash -s <<EOF
+      set -e
+      cd "$DEPLOY_ROOT"
+      echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+      docker network inspect nginx-proxy >/dev/null 2>&1 || docker network create nginx-proxy
+      export IMAGE="$IMAGE_TAG"
+      docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml pull
+      docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml up -d --remove-orphans
+      docker image prune -f
+      EOF
+
+build:
+  extends: .build
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^(dev|test|stage|main)$/'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+
+deploy:dev:
+  extends: .deploy
+  environment:
+    name: dev
+  variables:
+    COMPOSE_HOST: dev
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "dev"'
+
+deploy:test:
+  extends: .deploy
+  environment:
+    name: test
+  variables:
+    COMPOSE_HOST: test
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "test"'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "test"'
+
+deploy:stage:
+  extends: .deploy
+  environment:
+    name: stage
+  variables:
+    COMPOSE_HOST: stage
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "stage"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "stage"'
+
+# Optional button: promotes the same tag to prod. Pipeline stays green without it.
+deploy:prod:
+  extends: .deploy
+  environment:
+    name: production
+  variables:
+    COMPOSE_HOST: prod
+  allow_failure: true
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "prod"'
+      when: manual
+
+deploy:vm1:
+  extends: .deploy
+  environment:
+    name: vm1
+  variables:
+    COMPOSE_HOST: vm1
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "vm1"'
+
+deploy:vm2:
+  extends: .deploy
+  environment:
+    name: vm2
+  variables:
+    COMPOSE_HOST: vm2
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CONTOUR == "vm2"'
+
+# After a successful prod deploy: bump package.json, tag vX.Y.Z, push back, and
+# retag the already-built image (same digest, no rebuild) with the new version.
+# Three manual buttons — press the one matching the semver level of the release.
+.release:
+  stage: release
+  image: docker:latest
+  tags:
+    - docker
+  needs:
+    - deploy:prod
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+  allow_failure: true
+  before_script:
+    - apk add --no-cache nodejs npm git openssh-client
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo "$GIT_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+    - ssh-keyscan -H "$CI_SERVER_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+  script:
+    - git config user.email "ci@$CI_SERVER_HOST"
+    - git config user.name "release-bot"
+    - git remote set-url origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
+    - npm version ${BUMP} -m "chore(release) v%s [skip ci]"
+    - VERSION=$(node -p "require('./package.json').version")
+    - git push origin "HEAD:$CI_COMMIT_REF_NAME" -o ci.skip
+    - git push origin --tags -o ci.skip
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull "$IMAGE_TAG"
+    - docker tag "$IMAGE_TAG" "$CI_REGISTRY_IMAGE:v$VERSION"
+    - docker tag "$IMAGE_TAG" "$CI_REGISTRY_IMAGE:latest"
+    - docker push "$CI_REGISTRY_IMAGE:v$VERSION"
+    - docker push "$CI_REGISTRY_IMAGE:latest"
+
+release:patch:
+  extends: .release
+  variables:
+    BUMP: patch
+
+release:minor:
+  extends: .release
+  variables:
+    BUMP: minor
+
+release:major:
+  extends: .release
+  variables:
+    BUMP: major

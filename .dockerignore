@@ -1,42 +1,47 @@
-**/.DS_Store
-**/__pycache__
-**/.venv
-**/.classpath
-**/.dockerignore
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/*.log
-**/*.md
-**/*.php~
-**/*.dist.php
-**/*.dist
-**/*.cache
-**/._*
-**/bin
-**/charts
-**/docker-compose*
-**/compose*
-**/Dockerfile*
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-**/Thumbs.db
-.github/
-docs/
-public/bundles/
-var/
-tests/
-vendor/
+# Keep the build context (and final image) lean and reproducible.
+# NOTE: environments/*.env are intentionally excluded — the image is
+# environment-agnostic; contour config is injected at runtime by compose.
+
+.git
+.gitignore
 .editorconfig
-.env.*.local
-.env.local
-.env.local.php
+.gitlab-ci.yml
+
+node_modules
+.nuxt
+.output
+.data
+dist
+
+# runtime-only config — never bake it into the image
+# (exception: environments/build.env IS the build-time env)
+environments/*.env
+!environments/build.env
+*.env
+.env
+.env.*
+
+# docker / ci artifacts
+Dockerfile*
+.dockerignore
+Docker
+docker-compose*
+compose*
+
+# tooling / editors
+.vscode
+.vs
+.idea
+*.iml
+nuxt.run.xml
+coverage
+**/*.log
+npm-debug.log*
+**/.DS_Store
+**/Thumbs.db
+**/._*
+
+# docs & meta (not needed to build the app)
+docs
+**/*.md
 LICENSE

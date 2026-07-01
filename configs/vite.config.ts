@@ -17,12 +17,9 @@ export default <Partial<NuxtOptions['vite']>> {
     ],
   },
   server: {
-    watch: {
-      usePolling: true,
-    },
     hmr: {
       protocol: 'ws',
-      host: String(process.env.HOST) || '0.0.0.0',
+      host: process.env.HOST || '0.0.0.0',
     },
   },
 }

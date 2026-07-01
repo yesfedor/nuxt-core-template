@@ -61,22 +61,22 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
+    // Defaults only — real values are injected at runtime via NUXT_PUBLIC_* env
     public: {
-      APP_DEBUG: Boolean(process.env.APP_DEBUG),
-      APP_IS_PROD: Boolean(process.env.APP_IS_PROD),
-      BASE_URL: String(process.env.BASE_URL),
-      DEBUG: Boolean(process.env.DEBUG),
+      APP_DEBUG: false,
+      APP_IS_PROD: false,
+      BASE_URL: '',
       NUXT_SSR: Boolean(process.env.NUXT_SSR),
     },
   },
 
   sourcemap: {
-    client: Boolean(process.env.APP_DEBUG),
-    server: Boolean(process.env.APP_DEBUG || process.env.NUXT_SSR ? 1 : process.env.APP_DEBUG),
+    client: Boolean(process.env.NUXT_PUBLIC_APP_DEBUG),
+    server: Boolean(process.env.NUXT_PUBLIC_APP_DEBUG || process.env.NUXT_SSR),
   },
 
   devServer: {
-    host: String(process.env.HOST) || '0.0.0.0',
+    host: process.env.HOST || '0.0.0.0',
     port: Number(process.env.NITRO_PORT) || 3000,
   },
 
