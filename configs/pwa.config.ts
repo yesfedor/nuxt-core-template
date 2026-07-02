@@ -9,7 +9,7 @@ export default <Partial<NuxtOptions['pwa']>> {
   },
   registerType: 'autoUpdate',
   manifest: {
-    id: 'su.iny.nuxt-core-template',
+    id: 'yesfedor-nuxt-core-template',
     name: 'Nuxt Core Template v3.12.2',
     display: 'standalone',
     display_override: ['window-controls-overlay', 'standalone'],
