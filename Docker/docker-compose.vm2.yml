@@ -4,7 +4,7 @@
 services:
   app:
     image: ${IMAGE:?IMAGE is required}
-    container_name: nuxt-core-template-vm2
+    container_name: ${PROJECT:?PROJECT is required}-vm2
     restart: unless-stopped
     env_file:
       - ../environments/vm2.env

@@ -4,7 +4,7 @@
 services:
   app:
     image: ${IMAGE:?IMAGE is required}
-    container_name: nuxt-core-template-stage
+    container_name: ${PROJECT:?PROJECT is required}-stage
     restart: unless-stopped
     env_file:
       - ../environments/stage.env

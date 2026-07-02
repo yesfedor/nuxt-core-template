@@ -4,7 +4,7 @@
 services:
   app:
     image: ${IMAGE:?IMAGE is required}
-    container_name: nuxt-core-template-test
+    container_name: ${PROJECT:?PROJECT is required}-test
     restart: unless-stopped
     env_file:
       - ../environments/test.env

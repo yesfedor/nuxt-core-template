@@ -6,7 +6,7 @@ stages:
 variables:
   DOCKER_HOST: unix:///var/run/docker.sock
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
-  DEPLOY_ROOT: /home/projects/nuxt-core-template
+  DEPLOY_ROOT: /home/projects/$CI_PROJECT_NAME
   CONTOUR:
     value: "dev"
     options:
@@ -55,6 +55,7 @@ variables:
       cd "$DEPLOY_ROOT"
       echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
       docker network inspect nginx-proxy >/dev/null 2>&1 || docker network create nginx-proxy
+      export PROJECT="$CI_PROJECT_NAME"
       export IMAGE="$IMAGE_TAG"
       docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml pull
       docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml up -d --remove-orphans

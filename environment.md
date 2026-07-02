@@ -12,7 +12,7 @@ build  ->  push $CI_REGISTRY_IMAGE:<slug>-<sha>  ->  ssh VM: docker compose up
 ## Layout on a VM
 
 Deploy jobs `rsync` two folders into a single, stable path (`DEPLOY_ROOT`,
-default `/home/projects/nuxt-core-template`) and run compose from there:
+default `/home/projects/$CI_PROJECT_NAME`) and run compose from there:
 
 ```
 $DEPLOY_ROOT/
@@ -31,11 +31,13 @@ So an operator can manage a contour by hand:
 
 ```bash
 cd $DEPLOY_ROOT
-IMAGE=<tag> docker compose -f Docker/docker-compose.prod.yml ps
+PROJECT=<project-name> IMAGE=<tag> docker compose -f Docker/docker-compose.prod.yml ps
 ```
 
-The container always listens on `3000`; the host port is set per file (and
-overridable via `HOST_PORT`), so several contours can share one VM.
+Container names and `DEPLOY_ROOT` derive from `$CI_PROJECT_NAME` automatically —
+nothing project-specific is hardcoded. The container always listens on `3000`;
+the host port is set per file (overridable via `HOST_PORT`), so several contours
+can share one VM.
 
 | Contour | compose file                     | env file                | host port |
 |---------|----------------------------------|-------------------------|-----------|

@@ -5,8 +5,8 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-    image: nuxt-core-template:local
-    container_name: nuxt-core-template-local
+    image: ${PROJECT:-app}:local
+    container_name: ${PROJECT:-app}-local
     restart: unless-stopped
     env_file:
       - ../environments/local.env
