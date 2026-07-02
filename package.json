@@ -1,7 +1,7 @@
 {
   "name": "nuxt-core-template",
   "type": "module",
-  "version": "4.4.9",
+  "version": "4.4.10",
   "private": true,
   "engines": {
     "node": ">=24.18.0"
