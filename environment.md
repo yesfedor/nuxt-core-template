@@ -97,21 +97,25 @@ ssh-keygen -t ed25519 -C "nuxt-core-template ci deploy" -f ./ci_deploy_key -N ""
 - **Public** `ci_deploy_key.pub` → append to `~/.ssh/authorized_keys` of the
   deploy user on **every** contour VM.
 - **Private** `ci_deploy_key` → *Settings → CI/CD → Variables* → `SSH_PRIVATE_KEY`
-  (type **Variable**, **Masked**, **Protected**).
+  (type **Variable**; **do NOT tick Protected** — deploys also run from the
+  unprotected `dev`/`test`/`stage` branches; Masked usually rejects multiline
+  keys — leave it off).
 
-### 4. Release deploy key (CI → this repo)
+### 4. Release token (CI → repo, group-wide)
 
-The `release` job pushes the version bump + tag back, so it needs a key with
-**write** access to the repo:
+The `release:*` jobs push the version bump + tag back over HTTPS using a
+**Group Access Token** — set up once per group, works for every project in it
+(current and future), no per-repo deploy key.
 
-```bash
-ssh-keygen -t ed25519 -C "nuxt-core-template ci release" -f ./ci_release_key -N ""
-```
+*Group → Settings → Access tokens → Add new token*
+- Name: `ci-release-bot`
+- Role: **Maintainer** (required to push to the protected `main`; `write_repository`
+  scope alone isn't enough — the branch rule checks the role)
+- Scope: **`write_repository`** only (registry pushes use the built-in job token)
 
-- **Public** `ci_release_key.pub` → *Settings → Repository → Deploy keys* → add,
-  tick **"Grant write permissions to this key"**.
-- **Private** `ci_release_key` → CI/CD Variable `GIT_SSH_PRIVATE_KEY`
-  (**Masked**, **Protected**).
+Then *Group → Settings → CI/CD → Variables* → add `CI_RELEASE_TOKEN` = the token
+value (type **Variable**, **Masked ✓**, **Protected ✓** — releases run only on
+the protected `main`).
 
 Delete the local key files afterwards.
 
@@ -120,9 +124,9 @@ Delete the local key files afterwards.
 | Variable              | Scope                | Notes                                        |
 |-----------------------|----------------------|----------------------------------------------|
 | `SSH_USER`            | global               | deploy user on the VMs                        |
-| `SSH_PRIVATE_KEY`     | global (masked)      | CI → VM deploy key                            |
-| `SSH_HOST`            | **per environment**  | host/IP of each contour (dev/test/stage/production/vm1/vm2). Same value for several = co-located VM |
-| `GIT_SSH_PRIVATE_KEY` | global (masked)      | release push-back deploy key                  |
+| `SSH_PRIVATE_KEY`     | global, unprotected  | CI → VM deploy key                            |
+| `SSH_HOST`            | **per environment**  | host/IP of each contour (dev/test/stage/production/vm1/vm2). Same value for several = co-located VM; single VM for everything = one variable with scope `All` |
+| `CI_RELEASE_TOKEN`    | **group**, masked, protected | Group Access Token (Maintainer + `write_repository`) for the version push-back |
 | `DEPLOY_ROOT`         | optional             | override the on-VM path (default `/home/projects/nuxt-core-template`) |
 | `HOST_PORT`           | optional             | override a contour's host port                |
 
