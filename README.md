@@ -8,7 +8,7 @@
 ### **Enterprise-grade Nuxt 3 Starter Template**  
 *Accelerate your Next Web Project with Production-Ready Foundation*
 
-[![Nuxt 3 Poster](https://nuxt.com/assets/design-kit/logo-green-white.svg)](https://nuxt-core-template.iny.su/)
+[![Nuxt 3 Poster](https://nuxt.com/assets/design-kit/logo-green-white.svg)](https://nuxt-core-template.fivgpn.com/)
 
 ## 🌟 Key Features
 
@@ -183,4 +183,4 @@ MIT © [Garanin Fedor](https://yesfedor.com)
 ---
 
 [![Explore on GitHub](https://img.shields.io/badge/View%20on-GitHub-181717?logo=github)](https://github.com/yesfedor/nuxt-core-template)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success)](https://nuxt-core-template.iny.su/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success)](https://nuxt-core-template.fivgpn.com/)

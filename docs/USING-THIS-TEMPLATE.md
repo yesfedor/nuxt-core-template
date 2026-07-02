@@ -182,7 +182,9 @@ scope `All`.
 1. `rsync` папок `Docker/` и `environments/` в `$DEPLOY_ROOT` (репозиторий на VM
    не клонируется — копируются только эти две папки).
 2. `docker login` в registry встроенным job-токеном.
-3. `docker compose -f Docker/docker-compose.<contour>.yml pull && up -d`.
+3. `docker compose -p <project>-<contour> -f Docker/docker-compose.<contour>.yml
+   pull && up -d`. Отдельный project name на контур — поэтому деплой одного
+   контура не трогает контейнеры другого.
 
 ## Как идёт релиз (только на `main`, после ▶ `deploy:prod`)
 

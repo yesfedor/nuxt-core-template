@@ -31,8 +31,12 @@ So an operator can manage a contour by hand:
 
 ```bash
 cd $DEPLOY_ROOT
-PROJECT=<project-name> IMAGE=<tag> docker compose -f Docker/docker-compose.prod.yml ps
+PROJECT=<project-name> IMAGE=<tag> \
+  docker compose -p <project-name>-prod -f Docker/docker-compose.prod.yml ps
 ```
+
+> Each contour runs as its **own compose project** (`-p <project>-<contour>`) so
+> deploying one contour never touches another (`--remove-orphans` stays scoped).
 
 Container names and `DEPLOY_ROOT` derive from `$CI_PROJECT_NAME` automatically —
 nothing project-specific is hardcoded. The container always listens on `3000`;

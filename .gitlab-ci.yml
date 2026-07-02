@@ -57,8 +57,8 @@ variables:
       docker network inspect nginx-proxy >/dev/null 2>&1 || docker network create nginx-proxy
       export PROJECT="$CI_PROJECT_NAME"
       export IMAGE="$IMAGE_TAG"
-      docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml pull
-      docker compose -f Docker/docker-compose.$COMPOSE_HOST.yml up -d --remove-orphans
+      docker compose -p "$CI_PROJECT_NAME-$COMPOSE_HOST" -f Docker/docker-compose.$COMPOSE_HOST.yml pull
+      docker compose -p "$CI_PROJECT_NAME-$COMPOSE_HOST" -f Docker/docker-compose.$COMPOSE_HOST.yml up -d --remove-orphans
       docker image prune -f
       EOF
 
